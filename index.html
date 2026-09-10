@@ -37,10 +37,28 @@
   a:hover { border-bottom-color: var(--teal); }
   code { font-family: "SF Mono", Menlo, Consolas, monospace; background: var(--teal-light); padding: 1px 6px; border-radius: 3px; font-size: 0.9em; color: var(--teal-dark); }
 
+  /* -------- LOGO STRIP -------- */
+  .logo-strip {
+    background: #eaf2f4;
+    padding: 18px 24px;
+    border-bottom: 1px solid #d0dee1;
+  }
+  .logo-strip .wrap {
+    max-width: 1120px; margin: 0 auto;
+    display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
+  }
+  .logo-strip img { display: block; height: 46px; width: auto; }
+  .logo-strip img.teich { height: 44px; }
+  @media (max-width: 620px) {
+    .logo-strip .wrap { gap: 20px; justify-content: center; }
+    .logo-strip img { height: 34px; }
+    .logo-strip img.teich { height: 32px; }
+  }
+
   /* -------- HEADER -------- */
   header {
     background: linear-gradient(180deg, #0a5b64 0%, #0e7a86 100%);
-    color: white; padding: 44px 24px 34px;
+    color: white; padding: 40px 24px 34px;
     border-bottom: 4px solid #7ac4cd;
   }
   header .wrap { max-width: 1120px; margin: 0 auto; }
@@ -239,12 +257,21 @@
 </head>
 <body>
 
+<!-- ================ LOGO STRIP ================ -->
+<div class="logo-strip">
+  <div class="wrap">
+    <a href="https://www.cam.ac.uk" target="_blank" rel="noopener" aria-label="University of Cambridge">
+      <img src="logo_cambridge.png" alt="University of Cambridge">
+    </a>
+    <a href="https://www.teichlab.org" target="_blank" rel="noopener" aria-label="Teichmann Lab">
+      <img class="teich" src="logo_teichlab.png" alt="Teichmann Lab — Be Bold. Be Brilliant. Be Kind.">
+    </a>
+  </div>
+</div>
+
 <!-- ================ HEADER ================ -->
 <header>
   <div class="wrap">
-    <div class="brand-row">
-      <div class="lab">University of Cambridge · Teichmann Lab <em>Be Bold. Be Brilliant. Be Kind.</em></div>
-    </div>
     <h1 class="title">Cells of the peripheral nerve in health and disease</h1>
     <div class="authors">
       <span class="first">Yizhou Yu</span>, Daniel B. Rainbow, Zoya G. Georgieva, Lorenz Kretschmer, Nadav Yayon, Shani Perera, Rakesh Kapuge, Hansheng Xue, Ken To, Anna Wilbrey-Clark, Krzysztof Polanski, Mayen Briggs, David Hilton, Joanne L. Jones and <span class="first">Sarah A. Teichmann</span>.
@@ -554,76 +581,11 @@
   <!-- ============ SUMMARY ============ -->
   <section class="tab-panel" id="summary">
     <div class="card">
-      <h2>Summary — one axis, three compartments</h2>
+      <h2>Summary</h2>
 
-      <div class="summary-diagram">
-        <svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
-          <!-- Blood vessel -->
-          <rect x="30" y="30" width="840" height="90" rx="8" fill="#fdecec" stroke="#c85757" stroke-width="1.5"/>
-          <text x="50" y="55" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#8b3d3d">BLOOD</text>
-
-          <!-- PNS -->
-          <rect x="30" y="200" width="840" height="90" rx="8" fill="#e8f2ec" stroke="#4a8c5f" stroke-width="1.5"/>
-          <text x="50" y="225" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#2d5a3d">PERIPHERAL NERVE</text>
-
-          <!-- Cells in blood -->
-          <g transform="translate(180,75)">
-            <circle r="22" fill="#4a90a4"/>
-            <text y="4" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">T cell</text>
-            <text y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">CX3CR1⁺ CCL5⁺</text>
-          </g>
-          <g transform="translate(370,75)">
-            <circle r="22" fill="#8664a0"/>
-            <text y="-2" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">Monocyte</text>
-            <text y="10" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="9">DPYD⁺</text>
-            <text y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">CX3CR1⁺ TREM1⁺</text>
-          </g>
-          <g transform="translate(560,75)">
-            <circle r="22" fill="#0e7a86"/>
-            <text y="4" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">B AFF3⁺</text>
-            <text y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">BANK1⁺</text>
-          </g>
-
-          <!-- Arrows blood -> nerve -->
-          <defs>
-            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-              <path d="M0,0 L8,5 L0,10 z" fill="#8b3d3d"/>
-            </marker>
-          </defs>
-          <path d="M 180 130 Q 180 165 220 200" stroke="#8b3d3d" stroke-width="2" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
-          <path d="M 370 130 Q 370 165 410 200" stroke="#8b3d3d" stroke-width="2" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
-
-          <!-- Cells in nerve -->
-          <g transform="translate(220,255)">
-            <circle r="20" fill="#4a90a4" opacity="0.85"/>
-            <text y="4" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">CD8⁺</text>
-          </g>
-          <g transform="translate(410,255)">
-            <circle r="20" fill="#8664a0" opacity="0.85"/>
-            <text y="-1" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="9" font-weight="700">M1 mac</text>
-            <text y="10" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="9">ADAM28⁺</text>
-          </g>
-
-          <!-- Schwann cell -->
-          <g transform="translate(620,255)">
-            <circle r="26" fill="none" stroke="#c49b0b" stroke-width="4" stroke-dasharray="4,3"/>
-            <circle r="14" fill="#fef3c7"/>
-            <text y="4" text-anchor="middle" fill="#8a6a00" font-family="Inter,sans-serif" font-size="10" font-weight="700">Schwann</text>
-          </g>
-          <text x="620" y="305" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">Stalled repair</text>
-
-          <!-- Fibroblast -->
-          <g transform="translate(760,255)">
-            <ellipse rx="24" ry="16" fill="#e8dccb" stroke="#a08560" stroke-width="1.5"/>
-            <text y="0" text-anchor="middle" fill="#5a4a30" font-family="Inter,sans-serif" font-size="9" font-weight="700">Fibroblast</text>
-            <text y="12" text-anchor="middle" fill="#5a4a30" font-family="Inter,sans-serif" font-size="8">SLC2A1⁻</text>
-          </g>
-
-          <!-- Axis label -->
-          <text x="450" y="165" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#c85757">CX3CR1 – fractalkine axis</text>
-          <text x="450" y="182" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#8b3d3d" font-style="italic">candidate therapeutic target</text>
-        </svg>
-      </div>
+      <figure class="inline-figure" style="background: white;">
+        <img src="summary.jpg" alt="Summary diagram: blood populations (T cell CX3CR1+ CCL5+, Monocyte CX3CR1+ TREM1+, B AFF3+ BANK1) migrating to peripheral nerve where T cells and macrophages act on Schwann cells that shift from myelinating to repair states">
+      </figure>
 
       <h3>Findings across compartments</h3>
       <ol>
