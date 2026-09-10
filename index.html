@@ -68,18 +68,35 @@
   /* -------- MAIN LAYOUT -------- */
   main { max-width: 1120px; margin: 0 auto; padding: 28px 24px 40px; }
   nav.tabs {
-    display: flex; flex-wrap: wrap; gap: 4px; margin: -20px 0 26px;
-    background: white; padding: 8px; border-radius: 10px;
-    box-shadow: 0 6px 24px rgba(10,91,100,0.10), 0 1px 3px rgba(0,0,0,0.04);
+    display: flex; flex-wrap: wrap; gap: 6px; margin: -20px 0 30px;
+    background: white; padding: 10px; border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(10,91,100,0.14), 0 1px 3px rgba(0,0,0,0.05);
     position: sticky; top: 12px; z-index: 10;
+    border: 1px solid var(--border);
   }
   nav.tabs button {
-    background: transparent; border: none; padding: 10px 14px; border-radius: 6px;
-    font: inherit; color: var(--muted); cursor: pointer; font-weight: 500; font-size: 13.5px;
-    transition: all 0.12s;
+    background: #f4f2ea; border: 1px solid transparent; padding: 12px 18px; border-radius: 8px;
+    font: inherit; color: var(--ink); cursor: pointer; font-weight: 600; font-size: 14px;
+    transition: all 0.15s; letter-spacing: 0.1px;
+    display: inline-flex; align-items: center; gap: 8px;
   }
-  nav.tabs button:hover { background: var(--teal-light); color: var(--teal-dark); }
-  nav.tabs button.active { background: var(--teal); color: white; }
+  nav.tabs button .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: white; color: var(--muted);
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0;
+    transition: all 0.15s;
+  }
+  nav.tabs button:hover {
+    background: var(--teal-light); color: var(--teal-dark);
+    border-color: var(--teal); transform: translateY(-1px);
+  }
+  nav.tabs button:hover .num { background: white; color: var(--teal-dark); }
+  nav.tabs button.active {
+    background: var(--teal); color: white; border-color: var(--teal-dark);
+    box-shadow: 0 3px 10px rgba(14,122,134,0.35);
+  }
+  nav.tabs button.active .num { background: white; color: var(--teal-dark); }
   section.tab-panel { display: none; animation: fadeIn 0.22s ease; }
   section.tab-panel.active { display: block; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
@@ -175,9 +192,7 @@
       <a href="mailto:yzy21@cam.ac.uk">yzy21@cam.ac.uk</a>
     </div>
     <div class="cta">
-      <a class="primary" href="YY_TeichLab_poster_Sept2026.pdf" target="_blank">Download poster (PDF)</a>
-      <a href="https://github.com/izu0421/teichlab_poster" target="_blank" rel="noopener">GitHub repository</a>
-      <a href="report_cidp_nature.md" target="_blank">Full report (Markdown)</a>
+      <a class="primary" href="https://github.com/izu0421/teichlab_poster" target="_blank" rel="noopener">GitHub repository</a>
     </div>
   </div>
 </header>
@@ -185,14 +200,14 @@
 <!-- ================ MAIN ================ -->
 <main>
   <nav class="tabs" id="tabs" role="tablist">
-    <button class="active" data-tab="overview">Overview</button>
-    <button data-tab="nerve">Nerve tissue</button>
-    <button data-tab="myelin">Myelin & Schwann</button>
-    <button data-tab="inflammation">Inflammation in nerve</button>
-    <button data-tab="blood">Blood atlas</button>
-    <button data-tab="tcrfish">TCRfish</button>
-    <button data-tab="alphagenome">alphagenome2niche</button>
-    <button data-tab="summary">Summary</button>
+    <button class="active" data-tab="overview"><span class="num">1</span>Overview</button>
+    <button data-tab="nerve"><span class="num">2</span>Nerve tissue</button>
+    <button data-tab="myelin"><span class="num">3</span>Myelin &amp; Schwann</button>
+    <button data-tab="inflammation"><span class="num">4</span>Inflammation in nerve</button>
+    <button data-tab="blood"><span class="num">5</span>Blood atlas</button>
+    <button data-tab="tcrfish"><span class="num">6</span>TCRfish</button>
+    <button data-tab="alphagenome"><span class="num">7</span>alphagenome2niche</button>
+    <button data-tab="summary"><span class="num">8</span>Summary</button>
   </nav>
 
   <!-- ============ OVERVIEW ============ -->
