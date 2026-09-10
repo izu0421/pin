@@ -3,372 +3,557 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CIDP peripheral blood atlas — interactive extension</title>
+<title>Cells of the peripheral nerve in health and disease · Teichmann Lab</title>
+<meta name="description" content="Interactive companion to the Teichmann Lab poster on single-cell and spatial multiomics of CIDP peripheral nerve and blood.">
 <style>
   :root {
-    --bg: #f6f8fb;
+    --bg: #f7f6f2;
     --card: #ffffff;
-    --ink: #0f2447;
-    --muted: #55668a;
-    --accent: #1e5aa8;
-    --accent-2: #2ea3b8;
-    --border: #dbe4f1;
-    --pos: #b13a3a;
-    --neg: #1f6b7a;
-    --highlight: #fff4d6;
+    --ink: #0d2a2f;
+    --muted: #526a70;
+    --teal: #0e7a86;
+    --teal-dark: #0a5b64;
+    --teal-light: #d7ebee;
+    --coral: #c85757;
+    --coral-light: #f3d6d6;
+    --cool: #4a90a4;
+    --gold: #c49b0b;
+    --border: #e2dfd6;
+    --highlight: #fdf6dc;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-    color: var(--ink); background: var(--bg); line-height: 1.55; font-size: 15.5px;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink); background: var(--bg); line-height: 1.6; font-size: 15.5px;
+    -webkit-font-smoothing: antialiased;
   }
+  a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(14,122,134,0.3); }
+  a:hover { border-bottom-color: var(--teal); }
+  code { font-family: "SF Mono", Menlo, Consolas, monospace; background: var(--teal-light); padding: 1px 6px; border-radius: 3px; font-size: 0.9em; color: var(--teal-dark); }
+
+  /* -------- HEADER -------- */
   header {
-    background: linear-gradient(135deg, #0f2447 0%, #1e5aa8 100%);
-    color: white; padding: 42px 24px 32px;
+    background: linear-gradient(180deg, #0a5b64 0%, #0e7a86 100%);
+    color: white; padding: 44px 24px 34px;
+    border-bottom: 4px solid #7ac4cd;
   }
-  header .wrap { max-width: 1080px; margin: 0 auto; }
-  header .kicker { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; margin-bottom: 8px; }
-  header h1 { margin: 0 0 10px; font-size: 30px; font-weight: 700; line-height: 1.25; }
-  header .sub { opacity: 0.85; font-size: 15px; max-width: 780px; }
-  header .meta { margin-top: 18px; display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; opacity: 0.85; }
-  header .meta a { color: #cfe1ff; text-decoration: none; border-bottom: 1px dotted #a9c7ee; }
-  main { max-width: 1080px; margin: 0 auto; padding: 24px; }
+  header .wrap { max-width: 1120px; margin: 0 auto; }
+  .brand-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.85; }
+  .brand-row .lab { font-weight: 600; }
+  .brand-row .lab em { font-style: normal; opacity: 0.7; font-weight: 400; margin-left: 8px; }
+  h1.title {
+    margin: 0 0 16px; font-size: 34px; font-weight: 700; line-height: 1.2;
+    max-width: 900px; letter-spacing: -0.5px;
+  }
+  .authors {
+    font-size: 14px; opacity: 0.9; max-width: 880px; line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .authors .first { font-weight: 600; }
+  .affil { font-size: 13px; opacity: 0.75; margin-bottom: 22px; }
+  .contact { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13.5px; margin-top: 4px; }
+  .contact a { color: #cfeef2; border-bottom: 1px dotted rgba(207,238,242,0.5); }
+  .contact a:hover { color: white; border-bottom-color: white; }
+  .cta { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .cta a {
+    background: rgba(255,255,255,0.14); color: white; padding: 9px 16px; border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.28); font-size: 13.5px; font-weight: 500;
+    transition: background 0.15s;
+  }
+  .cta a:hover { background: rgba(255,255,255,0.24); }
+  .cta a.primary { background: white; color: var(--teal-dark); border-color: white; }
+  .cta a.primary:hover { background: #eafaff; }
+
+  /* -------- MAIN LAYOUT -------- */
+  main { max-width: 1120px; margin: 0 auto; padding: 28px 24px 40px; }
   nav.tabs {
-    display: flex; flex-wrap: wrap; gap: 6px; margin: -18px 0 24px;
-    background: white; padding: 8px; border-radius: 12px; box-shadow: 0 4px 24px rgba(15,36,71,0.08);
+    display: flex; flex-wrap: wrap; gap: 4px; margin: -20px 0 26px;
+    background: white; padding: 8px; border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(10,91,100,0.10), 0 1px 3px rgba(0,0,0,0.04);
     position: sticky; top: 12px; z-index: 10;
   }
   nav.tabs button {
-    background: transparent; border: none; padding: 10px 14px; border-radius: 8px;
+    background: transparent; border: none; padding: 10px 14px; border-radius: 6px;
     font: inherit; color: var(--muted); cursor: pointer; font-weight: 500; font-size: 13.5px;
+    transition: all 0.12s;
   }
-  nav.tabs button:hover { background: #eef3fb; color: var(--ink); }
-  nav.tabs button.active { background: var(--accent); color: white; }
-  section.tab-panel { display: none; animation: fadeIn 0.25s ease; }
+  nav.tabs button:hover { background: var(--teal-light); color: var(--teal-dark); }
+  nav.tabs button.active { background: var(--teal); color: white; }
+  section.tab-panel { display: none; animation: fadeIn 0.22s ease; }
   section.tab-panel.active { display: block; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* -------- CARDS -------- */
   .card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 22px 26px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(15,36,71,0.04);
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 26px 30px; margin-bottom: 18px;
   }
-  .card h2 { margin: 0 0 6px; font-size: 22px; color: var(--accent); font-weight: 700; }
-  .card h3 { margin: 22px 0 8px; font-size: 16px; color: var(--ink); }
-  .card p { margin: 8px 0; color: var(--ink); }
-  .lead { font-size: 16px; color: var(--muted); font-style: italic; }
-  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
-  .stat { background: #f0f5fc; border-radius: 10px; padding: 14px 16px; }
-  .stat .n { font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1; }
-  .stat .l { font-size: 12px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-  table { width: 100%; border-collapse: collapse; margin: 10px 0 6px; font-size: 13.5px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
-  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; background: #f7f9fc; }
+  .card h2 { margin: 0 0 8px; font-size: 22px; color: var(--teal-dark); font-weight: 700; letter-spacing: -0.2px; }
+  .card h3 { margin: 24px 0 10px; font-size: 15.5px; color: var(--ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
+  .card p { margin: 8px 0; }
+  .lead { font-size: 16px; color: var(--muted); font-style: italic; margin-bottom: 4px; }
+
+  /* -------- STAT GRID -------- */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 18px 0 4px; }
+  .stat { background: var(--teal-light); border-radius: 8px; padding: 14px 16px; border-left: 3px solid var(--teal); }
+  .stat .n { font-size: 26px; font-weight: 700; color: var(--teal-dark); line-height: 1; letter-spacing: -0.5px; }
+  .stat .l { font-size: 11.5px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; }
+
+  /* -------- TABLES -------- */
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13.5px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px; background: #faf9f5; }
   td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  .pos { color: var(--pos); font-weight: 600; }
-  .neg { color: var(--neg); font-weight: 600; }
+  .pos { color: var(--coral); font-weight: 600; }
+  .neg { color: var(--cool); font-weight: 600; }
+
+  /* -------- BAR CHART -------- */
   .bar-chart { margin: 12px 0; }
-  .bar-row { display: grid; grid-template-columns: 200px 1fr 60px; gap: 12px; align-items: center; padding: 4px 0; font-size: 13px; }
+  .bar-row { display: grid; grid-template-columns: 210px 1fr 60px; gap: 12px; align-items: center; padding: 3px 0; font-size: 13px; }
   .bar-row .label { color: var(--ink); font-weight: 500; }
-  .bar-row .track { position: relative; height: 22px; background: #eef3fb; border-radius: 6px; overflow: hidden; }
+  .bar-row .track { position: relative; height: 20px; background: #f0ede4; border-radius: 4px; overflow: hidden; }
   .bar-row .fill { position: absolute; top: 0; bottom: 0; }
-  .bar-row .fill.pos { background: #d9a0a0; }
-  .bar-row .fill.neg { background: #7fb3bc; }
-  .bar-row .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; color: var(--muted); }
-  .axis { display: grid; grid-template-columns: 200px 1fr 60px; gap: 12px; padding: 4px 0; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 8px; padding-top: 8px; }
+  .bar-row .fill.pos { background: linear-gradient(90deg, #d99a9a, #c85757); }
+  .bar-row .fill.neg { background: linear-gradient(90deg, #6ba3b1, #4a90a4); }
+  .bar-row .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; color: var(--muted); font-weight: 500; }
+  .axis { display: grid; grid-template-columns: 210px 1fr 60px; gap: 12px; padding: 6px 0 0; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 6px; }
   .axis .marks { display: flex; justify-content: space-between; }
-  .callout { background: var(--highlight); border-left: 4px solid #d4a628; border-radius: 6px; padding: 12px 16px; margin: 14px 0; font-size: 14px; }
-  .callout strong { color: #8a6a00; }
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } .bar-row, .axis { grid-template-columns: 140px 1fr 50px; } }
-  footer { max-width: 1080px; margin: 40px auto 24px; padding: 20px 24px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
-  footer a { color: var(--accent); text-decoration: none; }
-  .qr-block { display: flex; align-items: center; gap: 20px; }
-  .qr-block img { width: 120px; height: 120px; }
-  code { font-family: "SF Mono", Menlo, Consolas, monospace; background: #eef3fb; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
-  .pill { display: inline-block; background: #eef3fb; color: var(--muted); font-size: 11px; padding: 3px 8px; border-radius: 10px; margin-left: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-  .pill.up { background: #f7e0e0; color: var(--pos); }
-  .pill.down { background: #dceff2; color: var(--neg); }
+  @media (max-width: 720px) {
+    .bar-row, .axis { grid-template-columns: 130px 1fr 50px; }
+  }
+
+  /* -------- CALLOUT -------- */
+  .callout {
+    background: var(--highlight); border-left: 4px solid var(--gold); border-radius: 4px;
+    padding: 13px 18px; margin: 16px 0; font-size: 14px; color: #5f4e0d;
+  }
+  .callout strong { color: #4a3d08; }
+  .callout.teal { background: var(--teal-light); border-color: var(--teal); color: var(--teal-dark); }
+  .callout.teal strong { color: var(--teal-dark); }
+
+  /* -------- GRID -------- */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* -------- PILLS -------- */
+  .pill { display: inline-block; font-size: 10.5px; padding: 3px 8px; border-radius: 10px; margin-left: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; vertical-align: middle; }
+  .pill.up { background: var(--coral-light); color: var(--coral); }
+  .pill.down { background: #d9e8ed; color: var(--cool); }
+  .pill.new { background: var(--teal); color: white; }
+
+  /* -------- SUMMARY DIAGRAM (SVG) -------- */
+  .summary-diagram { margin: 22px 0 12px; }
+  .summary-diagram svg { width: 100%; height: auto; max-width: 100%; display: block; }
+
+  /* -------- FOOTER -------- */
+  footer {
+    max-width: 1120px; margin: 40px auto 0; padding: 24px;
+    color: var(--muted); font-size: 13px; border-top: 1px solid var(--border);
+  }
+  footer .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+  footer .row > div { min-width: 220px; }
+  footer h4 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink); }
 </style>
 </head>
 <body>
 
+<!-- ================ HEADER ================ -->
 <header>
   <div class="wrap">
-    <div class="kicker">Poster · Teichmann Lab · September 2026</div>
-    <h1>Peripheral blood single-cell and proteomic profiling reveals coordinated effector lymphocyte egress and myeloid activation in CIDP</h1>
-    <div class="sub">Interactive extension of the printed poster — click through the findings, hover the bars, and see the underlying numbers behind each figure. All data drawn from 327,559 PBMCs across 21 CIDP patients and 7 neurological disease controls.</div>
-    <div class="meta">
-      <span>21 CIDP · 7 controls · 327,559 cells · 3,255 plasma proteins</span>
-      <span>·</span>
-      <a href="YY_TeichLab_poster_Sept2026.pdf" target="_blank">Download full poster (PDF)</a>
-      <span>·</span>
-      <a href="https://github.com/izu0421/teichlab_poster" target="_blank">GitHub repository</a>
+    <div class="brand-row">
+      <div class="lab">University of Cambridge · Teichmann Lab <em>Be Bold. Be Brilliant. Be Kind.</em></div>
+      <div>2-min summary</div>
+    </div>
+    <h1 class="title">Cells of the peripheral nerve in health and disease</h1>
+    <div class="authors">
+      <span class="first">Yizhou Yu</span>, Daniel B. Rainbow, Zoya G. Georgieva, Lorenz Kretschmer, Nadav Yayon, Shani Perera, Rakesh Kapuge, Hansheng Xue, Ken To, Anna Wilbrey-Clark, Krzysztof Polanski, Mayen Briggs, David Hilton, Joanne L. Jones and <span class="first">Sarah A. Teichmann</span>.
+    </div>
+    <div class="affil">Teichmann Lab @ Cambridge Stem Cell Institute, University of Cambridge, UK</div>
+    <div class="contact">
+      <a href="https://yizhouyu.com" target="_blank" rel="noopener">yizhouyu.com</a>
+      <a href="https://twitter.com/izu__u" target="_blank" rel="noopener">@izu__u</a>
+      <a href="mailto:yzy21@cam.ac.uk">yzy21@cam.ac.uk</a>
+    </div>
+    <div class="cta">
+      <a class="primary" href="YY_TeichLab_poster_Sept2026.pdf" target="_blank">Download poster (PDF)</a>
+      <a href="https://github.com/izu0421/teichlab_poster" target="_blank" rel="noopener">GitHub repository</a>
+      <a href="report_cidp_nature.md" target="_blank">Full report (Markdown)</a>
     </div>
   </div>
 </header>
 
+<!-- ================ MAIN ================ -->
 <main>
-  <nav class="tabs" id="tabs">
+  <nav class="tabs" id="tabs" role="tablist">
     <button class="active" data-tab="overview">Overview</button>
-    <button data-tab="cd8">CD8 effector egress</button>
-    <button data-tab="cd4">CD4 Th1 mobilization</button>
-    <button data-tab="myeloid">Myeloid bifurcation</button>
-    <button data-tab="neutrophils">Neutrophils / LDGs</button>
-    <button data-tab="bcells">B cells</button>
-    <button data-tab="proteome">Blood proteome</button>
-    <button data-tab="methods">Methods</button>
+    <button data-tab="nerve">Nerve tissue</button>
+    <button data-tab="myelin">Myelin & Schwann</button>
+    <button data-tab="inflammation">Inflammation in nerve</button>
+    <button data-tab="blood">Blood atlas</button>
+    <button data-tab="tcrfish">TCRfish</button>
+    <button data-tab="alphagenome">alphagenome2niche</button>
+    <button data-tab="summary">Summary</button>
   </nav>
 
-  <!-- OVERVIEW -->
+  <!-- ============ OVERVIEW ============ -->
   <section class="tab-panel active" id="overview">
     <div class="card">
-      <h2>The one-sentence story</h2>
-      <p class="lead">In CIDP blood, autoreactive effector T cells and interferon-activated monocytes are exiting the circulation for peripheral nerve tissue via a CX3CR1–fractalkine axis, while TREM1-driven inflammatory monocytes and immunosuppressive neutrophils accumulate in the blood as a counter-regulatory response.</p>
+      <h2>Unmet need in CIDP</h2>
+      <p class="lead">Chronic Inflammatory Demyelinating Polyneuropathy is a rare autoimmune disorder in which the immune system attacks the myelin sheath of peripheral nerves — causing muscle weakness and sensory loss — and lacks curative or highly targeted therapies.</p>
+
+      <h3>What we did</h3>
+      <p>Combined single-cell and spatial multiomics on <strong>peripheral nerve biopsies and matched blood</strong> from CIDP patients and controls, then integrated with plasma proteomics, GWAS, and AI-based TCR modelling.</p>
 
       <div class="stat-grid">
-        <div class="stat"><div class="n">193</div><div class="l">DA neighborhoods (of 20,758)</div></div>
-        <div class="stat"><div class="n">11</div><div class="l">Cell types differentially abundant</div></div>
-        <div class="stat"><div class="n">8 ↓</div><div class="l">Depleted in CIDP</div></div>
-        <div class="stat"><div class="n">3 ↑</div><div class="l">Enriched in CIDP</div></div>
-        <div class="stat"><div class="n">4</div><div class="l">Confirmed protein hits</div></div>
-        <div class="stat"><div class="n">216</div><div class="l">Enriched Olink pathways</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">Modalities: scRNA-seq · Xenium spatial · Olink</div></div>
+        <div class="stat"><div class="n">477</div><div class="l">Xenium genes profiled</div></div>
+        <div class="stat"><div class="n">27</div><div class="l">Xenium proteins</div></div>
+        <div class="stat"><div class="n">327,559</div><div class="l">PBMCs across 28 donors</div></div>
+        <div class="stat"><div class="n">3,255</div><div class="l">Plasma proteins (Olink Explore HT)</div></div>
+        <div class="stat"><div class="n">21 / 7</div><div class="l">CIDP patients / controls</div></div>
       </div>
 
-      <h3>Differentially abundant cell types (Milo, spatial FDR &lt; 0.10)</h3>
+      <h3>Three discoveries</h3>
+      <ol>
+        <li><strong>A repair signature in Schwann cells</strong> — stalled remyelination in the disease niche.</li>
+        <li><strong>Activated macrophages and T cells inside the nerve</strong> — CX3CR1⁺ M1 macrophages and CCL5⁺ CD8 T cells dominate the diseased microenvironment.</li>
+        <li><strong>Migratory inflammatory cells in blood</strong> — effector T/NK cells and IFN-activated monocytes exit the circulation via CX3CR1–fractalkine signalling.</li>
+      </ol>
+
+      <div class="callout teal">
+        <strong>Therapeutic implication.</strong> Blocking CX3CR1-mediated immune infiltration could be a targeted therapy for CIDP — replacing the broad immunosuppression (IVIg) that is the current standard of care.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NERVE ============ -->
+  <section class="tab-panel" id="nerve">
+    <div class="card">
+      <h2>Anatomy of the peripheral nerve — profiled at cellular resolution</h2>
+      <p class="lead">Xenium in situ sequencing of 477 genes and 27 proteins across control and CIDP sural nerve cross-sections, integrated with CellCharter to define spatial niches.</p>
+
+      <h3>Cell types identified</h3>
+      <div class="grid2">
+        <div>
+          <p><strong>Immune:</strong> Mast cells, macrophages (M1 CX3CR1⁺ ADAM28, M2 MNDA, M2 CLEC10A CCR2, M2 MS4A7, M2 LYVE1), T CD8 CCL5⁺, T CD4 CORO1A⁺ LCK⁺.</p>
+          <p><strong>Stromal:</strong> Fibroblasts, adipocytes, mural, arterial and venous smooth muscle.</p>
+        </div>
+        <div>
+          <p><strong>Nerve-support:</strong> Schwann cells — myelinating, non-myelinating (Remak bundles), repair Schwann / regenerating endoneurium, quiescent SOX2.</p>
+          <p><strong>Vascular / barrier:</strong> Perineurium (blood-nerve barrier), venous endothelium, epineurium, endoneurium, pericyte microvasculature, epineurial perivascular / lymphatic.</p>
+        </div>
+      </div>
+
+      <h3>Spatial niches (CellCharter)</h3>
+      <p>Twelve reproducible spatial niches were defined, ranging from mature endoneurium and myelinating Schwann territory to a distinct <strong>regenerating endoneurium / repair Schwann niche</strong> and an <strong>immune-adipose aggregate</strong> that is enriched in disease.</p>
+
+      <div class="callout">
+        <strong>Repair niche expansion in CIDP.</strong> % region occupied by the repair niche is elevated in CIDP relative to control, while the myelinating niche shrinks — the tissue-level footprint of failed regeneration.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MYELIN ============ -->
+  <section class="tab-panel" id="myelin">
+    <div class="card">
+      <h2>Myelin morphology and Schwann cell repair — AI segmentation from Xenium autofluorescence</h2>
+      <p class="lead">A fine-tuned CellPose-SAM + Gemma-aided CNN pipeline segments myelin rings directly from Xenium autofluorescence, letting us measure per-ring geometry and colocalise with immune cells at scale.</p>
+
+      <h3>Myelin geometry is altered in CIDP</h3>
+      <table>
+        <tr><th>Metric</th><th>Control</th><th>CIDP</th><th>Direction</th></tr>
+        <tr><td>Ring area (µm²)</td><td>higher</td><td>lower ★</td><td class="neg">↓ significant</td></tr>
+        <tr><td>Sheath thickness (µm)</td><td>higher</td><td>lower ★</td><td class="neg">↓ significant</td></tr>
+      </table>
+
+      <h3>Cell types spatially enriched around myelin rings</h3>
+      <div class="bar-chart" id="myelin-chart"></div>
+      <div class="axis"><div></div><div class="marks"><span>0.5×</span><span>1×</span><span>2×</span></div><div style="text-align:right;">spatial enrichment</div></div>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Schwann cells and <strong>M1 CX3CR1⁺ ADAM28 macrophages</strong> are enriched within one cell-diameter of myelin rings — placing the CX3CR1⁺ macrophage physically at the site of demyelination.</p>
+
+      <h3>Increased repair markers, loss of myelination genes</h3>
+      <div class="grid2">
+        <div>
+          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">Repair up in disease</p>
+          <table>
+            <tr><td>APOD</td><td class="num pos">↑</td></tr>
+            <tr><td>JUN</td><td class="num pos">↑</td></tr>
+            <tr><td>EGR1</td><td class="num pos">↑</td></tr>
+            <tr><td>SERPINB9</td><td class="num pos">↑</td></tr>
+          </table>
+        </div>
+        <div>
+          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">Myelin proteins down in disease</p>
+          <table>
+            <tr><td>MPZ</td><td class="num neg">↓</td></tr>
+            <tr><td>PRX</td><td class="num neg">↓</td></tr>
+            <tr><td>S100B</td><td class="num neg">↓</td></tr>
+            <tr><td>PLP1, PMP22, CNP</td><td class="num neg">↓</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout teal">
+        <strong>The Schwann cell picture.</strong> Repair-programme genes (APOD, JUN, EGR1) are elevated but myelin proteins (MPZ, PRX, PMP22, PLP1) are lost — a "stalled repair" state where cells have committed to regeneration but never finish making myelin. Restarting the SOX10/EGR2 transcriptional programme is a candidate therapeutic strategy.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INFLAMMATION IN NERVE ============ -->
+  <section class="tab-panel" id="inflammation">
+    <div class="card">
+      <h2>Contributors of inflammation in the nerve</h2>
+      <p class="lead">Barrier dysfunction plus infiltrating inflammatory T cells and macrophages together define the diseased microenvironment.</p>
+
+      <h3>Blood-nerve barrier integrity is impaired</h3>
+      <p><strong>SLC2A1</strong> (GLUT1, a perineurium metabolic and barrier marker) is negatively correlated with disease enrichment in the nerve niches (<em>r</em> = −0.28, <em>p</em> &lt; 0.0001). Loss of SLC2A1 tracks the same regions where inflammatory infiltrate accumulates — consistent with barrier breakdown enabling immune entry.</p>
+
+      <h3>T cell shift — CD8 CCL5⁺ expansion</h3>
+      <div class="bar-chart" id="nerve-tcell-chart"></div>
+      <div class="axis"><div></div><div class="marks"><span>−0.5</span><span>0</span><span>+0.5</span></div><div style="text-align:right;">log₂ disease enrichment</div></div>
+      <p style="font-size:13px; color: var(--muted);">T CD8 CCL5⁺ cells dominate the disease-associated T cell increase — likely originating from peripheral blood, matching the CD8 effector egress signature seen in the blood atlas.</p>
+
+      <h3>Macrophage polarisation shifts to M1</h3>
+      <table>
+        <tr><th>Subset</th><th>Marker</th><th>Direction in CIDP</th></tr>
+        <tr><td>M1</td><td>IRF8, APOE, TREM2</td><td class="pos">↑ increased</td></tr>
+        <tr><td>M1</td><td><strong>CX3CR1, ADAM28</strong></td><td class="pos">↑ increased</td></tr>
+        <tr><td>M2</td><td>MS4A7</td><td class="neg">↓ decreased</td></tr>
+        <tr><td>M2</td><td>LYVE1</td><td class="neg">↓ decreased</td></tr>
+      </table>
+
+      <div class="callout teal">
+        <strong>Convergence on CX3CR1.</strong> The macrophage subset expanded in the nerve carries the same fractalkine receptor CX3CR1 that marks the migrating monocytes and effector T cells in blood — pointing to a single axis (CX3CL1–CX3CR1) coordinating the shift from circulation to tissue.
+      </div>
+
+      <p style="font-size:13px; color: var(--muted); margin-top:16px;">Colocalisation panel (in poster): <strong>CX3CR1⁺ macrophages</strong> co-express CD11c, CD68, PLXDC2 and IRF8 — the phenotypic fingerprint of the inflammatory M1 subset within the nerve.</p>
+    </div>
+  </section>
+
+  <!-- ============ BLOOD ============ -->
+  <section class="tab-panel" id="blood">
+    <div class="card">
+      <h2>Blood atlas — 327,559 PBMCs, 28 donors</h2>
+      <p class="lead">Milo differential abundance testing identifies 11 cell types (8 depleted, 3 enriched) with a coherent story: effector lymphocytes and IFN monocytes leave the blood for tissue; TREM1⁺ inflammatory monocytes and LDGs accumulate.</p>
+
+      <h3>Differentially abundant populations</h3>
       <div class="bar-chart" id="da-chart"></div>
       <div class="axis">
         <div></div>
-        <div class="marks"><span>−2.0</span><span>−1.0</span><span>0</span><span>+1.0</span><span>+2.0</span><span>+3.0</span></div>
-        <div style="text-align:right;">log₂FC</div>
+        <div class="marks"><span>−2</span><span>−1</span><span>0</span><span>+1</span><span>+2</span><span>+3</span></div>
+        <div style="text-align:right;">median log₂FC</div>
       </div>
 
-      <div class="callout">
-        <strong>Interpretation.</strong> The pattern — effector T cells and IFN monocytes leaving the blood, TREM1⁺ inflammatory monocytes and LDGs staying behind — is the signature of an active, compartmentalized neuroinflammation with the target tissue (peripheral nerve) siphoning off the effector arm while the counter-regulatory arm remains in circulation.
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Two therapeutic entry points</h2>
-      <div class="grid2">
-        <div>
-          <h3>1 · Block the CX3CR1–fractalkine axis</h3>
-          <p>CX3CR1 is upregulated across the depleted, migrating populations — CD8 CTL/EM, NK, CD14⁺ monocytes, CD16⁺ monocytes. Small-molecule antagonists and anti-CX3CL1 antibodies exist in clinical-stage development.</p>
-        </div>
-        <div>
-          <h3>2 · Target TREM1⁺ inflammatory monocytes</h3>
-          <p>DPYD⁺PLXDC2⁺ monocytes carry the strongest activation signature (TREM1 pathway NES = +2.18) and are the likely source of circulating IL-6, IL-8 and IL1RN. TREM1 inhibitors are in Phase II development for sepsis.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CD8 -->
-  <section class="tab-panel" id="cd8">
-    <div class="card">
-      <h2>Terminal effector CD8 T cells are leaving the blood</h2>
-      <p class="lead">150 of 2,200 T CD8 CTL/EM neighborhoods depleted (median log₂FC = −0.98) — the strongest single-cell signal in the study.</p>
-
-      <h3>Depleted neighborhoods are terminally differentiated, migratory, and not exhausted</h3>
+      <h3>CD8 CTL/EM — terminal effectors leaving the blood</h3>
+      <p>150 of 2,200 T CD8 CTL/EM neighborhoods depleted (median log₂FC = −0.98) — the strongest single-cell signal in the study. Depleted cells are transcriptionally <strong>terminally differentiated</strong>, <strong>migratory</strong>, and <strong>not exhausted</strong>.</p>
       <div class="bar-chart" id="cd8-chart"></div>
-      <div class="axis"><div></div><div class="marks"><span>−4</span><span>−2</span><span>0</span><span>+2</span></div><div style="text-align:right;">log₂FC (DEG)</div></div>
+      <div class="axis"><div></div><div class="marks"><span>−4</span><span>−2</span><span>0</span><span>+2</span></div><div style="text-align:right;">log₂FC</div></div>
 
-      <div class="callout">
-        <strong>Migration, not exhaustion.</strong> ITGB1 and CX3CR1 up (tissue-homing), CD69 and CXCR6 down (not tissue-resident), MKI67 down (not proliferating), LAG3/TIGIT down (not exhausted). The PD-1-high signature is <em>negatively</em> enriched (NES = −1.75). This is the transcriptional fingerprint of effector CTLs mobilizing to peripheral nerve.
-      </div>
-
-      <h3>Concordant depletion in cytotoxic partners</h3>
-      <table>
-        <tr><th>Population</th><th class="num">Nbhds depleted</th><th class="num">Median log₂FC</th><th>Signature</th></tr>
-        <tr><td>T NK</td><td class="num">14 / 180</td><td class="num neg">−1.34</td><td>ITGB1↑, KLRG1↑, MAIT-like</td></tr>
-        <tr><td>NK</td><td class="num">12 / 1,489</td><td class="num neg">−0.12</td><td>CX3CR1↑, KIR2DL1↓, KIR3DL1↓</td></tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- CD4 -->
-  <section class="tab-panel" id="cd4">
-    <div class="card">
-      <h2>Th1-skewed CD4 helpers mobilize; central-memory CD4s undergo apoptosis</h2>
-      <p class="lead">CD4 T cells show two distinct depletion mechanisms — Th1 effector egress in Helper/Helper 0, and apoptosis-prone Th2-skewed depletion in central memory.</p>
-
+      <h3>Monocyte compartment splits in two</h3>
       <div class="grid2">
         <div>
-          <h3>T CD4 Helper (Th1 mobilization)</h3>
+          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">CD14⁺ IFN-activated <span class="pill down">Depleted</span></p>
           <table>
-            <tr><th>Gene</th><th class="num">log₂FC</th></tr>
-            <tr><td>CCL5</td><td class="num pos">+3.70</td></tr>
-            <tr><td>NKG7</td><td class="num pos">+3.77</td></tr>
-            <tr><td>GZMK</td><td class="num pos">+3.85</td></tr>
-            <tr><td>TBX21 (T-bet)</td><td class="num pos">+2.56</td></tr>
-            <tr><td>CXCR3</td><td class="num pos">+1.23</td></tr>
-            <tr><td>SELL</td><td class="num neg">−2.99</td></tr>
-            <tr><td>CCR7</td><td class="num neg">−2.55</td></tr>
-          </table>
-        </div>
-        <div>
-          <h3>T CD4 Central Memory (apoptosis)</h3>
-          <table>
-            <tr><th>Gene</th><th class="num">log₂FC</th></tr>
-            <tr><td>ITGB1</td><td class="num pos">+2.26</td></tr>
-            <tr><td>GATA3 (Th2)</td><td class="num pos">+2.12</td></tr>
-            <tr><td>CCR4 (Th2)</td><td class="num pos">+2.33</td></tr>
-            <tr><td>BCL2</td><td class="num neg">−1.99</td></tr>
-            <tr><td>BACH2</td><td class="num neg">−2.81</td></tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="callout">
-        <strong>Strongest proteomic support.</strong> CD4 Helper 0 shows the highest gene-vs-protein pathway concordance across the entire study (Spearman ρ = +0.52, <em>p</em> = 0.0002) — meaning the Th1 mobilization program is the primary driver of the blood proteomic signature in CIDP.
-      </div>
-    </div>
-  </section>
-
-  <!-- MYELOID -->
-  <section class="tab-panel" id="myeloid">
-    <div class="card">
-      <h2>The monocyte compartment splits in two</h2>
-      <p class="lead">Interferon-stimulated monocytes deplete (migrate to tissue); TREM1-driven inflammatory monocytes expand (retained in blood).</p>
-
-      <div class="grid2">
-        <div>
-          <h3>Depleted CD14⁺ (IFN-activated) <span class="pill down">↓</span></h3>
-          <table>
-            <tr><th>Gene</th><th class="num">log₂FC</th></tr>
             <tr><td>MX1</td><td class="num pos">+3.30</td></tr>
             <tr><td>IFI44L</td><td class="num pos">+3.59</td></tr>
             <tr><td>ISG15</td><td class="num pos">+2.96</td></tr>
             <tr><td>STAT1</td><td class="num pos">+2.37</td></tr>
             <tr><td>CX3CR1</td><td class="num pos">+1.29</td></tr>
           </table>
-          <p style="font-size:13px; color: var(--muted);">Hallmark IFN-α NES = +1.62, IFN-γ NES = +1.64. CX3CR1↑ points to fractalkine-mediated recruitment to peripheral nerve.</p>
         </div>
         <div>
-          <h3>Enriched DPYD⁺PLXDC2⁺ (TREM1) <span class="pill up">↑</span></h3>
+          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">DPYD⁺PLXDC2⁺ TREM1-driven <span class="pill up">Enriched</span></p>
           <table>
-            <tr><th>Gene</th><th class="num">log₂FC</th></tr>
             <tr><td>IL1B</td><td class="num pos">+2.07</td></tr>
             <tr><td>SGK1</td><td class="num pos">+1.85</td></tr>
             <tr><td>CD83</td><td class="num pos">+1.67</td></tr>
-            <tr><td>CLEC7A (dectin-1)</td><td class="num pos">+1.16</td></tr>
+            <tr><td>CLEC7A</td><td class="num pos">+1.16</td></tr>
             <tr><td>TLR2</td><td class="num pos">+0.97</td></tr>
-            <tr><td>IFITM3</td><td class="num neg">−2.78</td></tr>
           </table>
-          <p style="font-size:13px; color: var(--muted);">TREM1 activation signature NES = +2.18 (strongest single signal in the entire C7 collection).</p>
         </div>
       </div>
 
-      <div class="callout">
-        <strong>Proteomic validation — the strongest in the study.</strong> CLEC4E (Mincle, macrophage lectin) <em>confirmed</em> at log₂FC = +1.54 (<em>p</em><sub>adj</sub> = 0.016). IL-6 <em>confirmed</em> at +1.75 (<em>p</em><sub>adj</sub> = 0.045). CXCL8/IL-8 elevated at +0.70 — traceable to the DPYD⁺ monocytes (not neutrophils, where CXCL8 is <em>down</em> 3.0). IL1RN and STAT2 also elevated.
+      <div class="callout teal">
+        <strong>Proteomic validation of TREM1⁺ axis.</strong> CLEC4E (Mincle) <em>confirmed</em> at log₂FC = +1.54 (<em>p</em><sub>adj</sub> = 0.016). IL-6 <em>confirmed</em> at +1.75 (<em>p</em><sub>adj</sub> = 0.045). CXCL8, IL1RN, STAT2 all suggestive-elevated. TREM1 inhibitors (Phase II in sepsis) are a candidate for repurposing.
       </div>
     </div>
   </section>
 
-  <!-- NEUTROPHILS -->
-  <section class="tab-panel" id="neutrophils">
+  <!-- ============ TCRFISH ============ -->
+  <section class="tab-panel" id="tcrfish">
     <div class="card">
-      <h2>Enriched neutrophils are actually immunosuppressive LDGs</h2>
-      <p class="lead">2 of 356 neighborhoods enriched (median log₂FC = +2.76) — but the transcriptional profile is the opposite of activated neutrophils.</p>
+      <h2>TCRfish — agentic AI + AlphaFold3 to find autoreactive T cells <span class="pill new">New method</span></h2>
+      <p class="lead">Given a CIDP TCR repertoire, TCRfish orchestrates matching against reference disease-associated TCRs, infers common HLAs, predicts antigen presentation, and folds the peptide–MHC–TCR complex with AlphaFold3.</p>
 
-      <h3>Global suppression of canonical neutrophil function</h3>
+      <h3>Pipeline</h3>
+      <ol>
+        <li>Identify TCRs from CIDP samples (bulk + single-cell).</li>
+        <li>Match against reference disease-associated TCRs (annotate by CDR3 and disease-enrichment).</li>
+        <li>Infer common patient HLAs.</li>
+        <li>Predict which myelin-derived peptides are presented.</li>
+        <li>Fold the peptide-MHC-TCR complex with AlphaFold3 to score plausible binding.</li>
+      </ol>
+
+      <h3>Output</h3>
+      <p><strong>184 candidate peptides</strong> prioritised for experimental validation, spanning myelin target proteins <strong>MPZ, CNTN1, MBP, BDNF, MAG, PLP1, PMP2</strong>. Representative CDR3α/β pairs recovered from CIDP donors (from the poster):</p>
       <table>
-        <tr><th>Category</th><th>Genes</th><th class="num">log₂FC (representative)</th></tr>
-        <tr><td>Effector / granules</td><td>S100A8, S100A9, MPO, ELANE, DEFA3</td><td class="num neg">−6.7 to −8.6</td></tr>
-        <tr><td>Trafficking</td><td>CXCR1, CXCR2, ITGB2, SELL, FCGR3B</td><td class="num neg">−2.7 to −6.2</td></tr>
-        <tr><td>Antigen presentation</td><td>B2M, HLA-A, HLA-B, HLA-C</td><td class="num neg">−4.9 to −6.2</td></tr>
+        <tr><th>CDR3α</th><th>CDR3β</th></tr>
+        <tr><td><code>AVLSGYSTLT</code></td><td><code>AWKRGTGDEKLF</code></td></tr>
+        <tr><td><code>ALSEIGTSYDKVI</code></td><td><code>ASSQSGTSGRETQY</code></td></tr>
+        <tr><td><code>AMSAVSGNTPLV</code></td><td><code>ASSPGNTEAF</code></td></tr>
+        <tr><td><code>AASGAAGNKLT</code></td><td><code>ASSLQGNTEAF</code></td></tr>
       </table>
 
-      <div class="callout">
-        <strong>LDG / MDSC-like phenotype.</strong> Loss of effector function, trafficking capacity, and MHC I — the signature of immunosuppressive low-density granulocytes / MDSCs described in autoimmune disease. Likely a counter-regulatory response to chronic inflammation. Proteomic support is weak (MPO unchanged), consistent with the LDG signature being blood-restricted.
+      <div class="callout teal">
+        <strong>Why this matters.</strong> Direct identification of <em>autoantigen-specific</em> TCRs in CIDP has never been demonstrated at scale. If validated, these clones become both diagnostic biomarkers and candidate targets for antigen-specific tolerogenic therapy.
       </div>
     </div>
   </section>
 
-  <!-- B CELLS -->
-  <section class="tab-panel" id="bcells">
+  <!-- ============ ALPHAGENOME ============ -->
+  <section class="tab-panel" id="alphagenome">
     <div class="card">
-      <h2>B AFF3⁺ enrichment with active TGF-β / SMAD3 signaling</h2>
-      <p class="lead">1 of 68 neighborhoods enriched (median log₂FC = +2.64) — preliminary but suggests naive B cell activation or Breg differentiation.</p>
+      <h2>alphagenome2niche — spatial context improves GWAS interpretation <span class="pill new">New method</span></h2>
+      <p class="lead">A GNN-based framework that maps GWAS-significant SNPs onto spatial niches rather than isolated cell types — and outperforms cell-type-only prediction on held-out data.</p>
 
-      <table>
-        <tr><th>Gene</th><th class="num">log₂FC</th><th>Interpretation</th></tr>
-        <tr><td>BANK1</td><td class="num pos">+0.54</td><td>B cell activation</td></tr>
-        <tr><td>AFF3</td><td class="num pos">+0.44</td><td>Naive B cell TF</td></tr>
-        <tr><td>SMAD3</td><td class="num pos">+1.23</td><td>TGF-β signaling, Breg differentiation</td></tr>
-        <tr><td>B2M</td><td class="num neg">−1.34</td><td>MHC I suppression</td></tr>
-      </table>
+      <h3>Approach</h3>
+      <ol>
+        <li>Learn gene-expression-based cell types and GNN-constructed spatial niches from Xenium data.</li>
+        <li>Linear-probe on AlphaGenome to predict SNP-level effect on tissue.</li>
+        <li>Feed CIDP GWAS-significant variants through the model to score effect on cell types <em>and</em> niches.</li>
+      </ol>
+
+      <h3>Benchmark (Atera held-out data)</h3>
+      <div class="stat-grid">
+        <div class="stat"><div class="n">~0.22</div><div class="l">Cell-type only (Pearson r)</div></div>
+        <div class="stat"><div class="n">~0.27</div><div class="l">+ spatial niche (Pearson r)</div></div>
+        <div class="stat"><div class="n">Δ = +0.05</div><div class="l">Improvement</div></div>
+        <div class="stat"><div class="n">p = 4×10⁻¹⁵</div><div class="l">Significance</div></div>
+      </div>
+
+      <h3>CIDP-relevant hits in sural nerve biopsies</h3>
+      <p>Top SNPs with predicted effect on non-myelinating Schwann cells and endothelial venous cells (from the poster's Manhattan plot): <strong>SCMH1</strong>, <strong>ENSG00000249868</strong>, <strong>PTPRD</strong>, <strong>DNA2</strong>, <strong>ANO6</strong>, <strong>ENSG00000266489</strong>.</p>
 
       <div class="callout">
-        <strong>Proteomic hint.</strong> IL-10 elevated in blood (log₂FC = +1.04, <em>p</em> = 0.0025, suggestive) — concordant with a Breg/TGF-β immunoregulatory program. Requires validation in larger cohorts given the small neighborhood count.
+        <strong>Interpretation.</strong> Spatial context adds real, statistically robust signal beyond cell-type-level SNP interpretation. In CIDP, several GWAS variants map preferentially to non-myelinating Schwann cells — cells not previously implicated by cell-type-only analyses.
       </div>
     </div>
   </section>
 
-  <!-- PROTEOME -->
-  <section class="tab-panel" id="proteome">
+  <!-- ============ SUMMARY ============ -->
+  <section class="tab-panel" id="summary">
     <div class="card">
-      <h2>Blood proteome — inflammatory activation without cell-count change</h2>
-      <p class="lead">Of 3,255 Olink proteins tested, 4 confirmed and 72 suggestive — all elevated. Cell-identity markers unchanged. Cytokines and chemokines collectively up.</p>
+      <h2>Summary — one axis, three compartments</h2>
 
-      <h3>Confirmed hits (BH <em>p</em><sub>adj</sub> &lt; 0.05)</h3>
-      <table>
-        <tr><th>Protein</th><th class="num">log₂FC</th><th class="num">p<sub>adj</sub></th><th>Source cell / meaning</th></tr>
-        <tr><td>PSIP1</td><td class="num pos">+2.29</td><td class="num">2.5×10⁻⁵</td><td>Chromatin regulator; source unclear</td></tr>
-        <tr><td>SSNA1</td><td class="num pos">+1.70</td><td class="num">0.012</td><td>Centrosome protein</td></tr>
-        <tr><td>CLEC4E (Mincle)</td><td class="num pos">+1.54</td><td class="num">0.016</td><td>Macrophage lectin — <strong>TREM1⁺ monocytes</strong></td></tr>
-        <tr><td>IL-6</td><td class="num pos">+1.75</td><td class="num">0.045</td><td>Monocyte-derived cytokine</td></tr>
-      </table>
+      <div class="summary-diagram">
+        <svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- Blood vessel -->
+          <rect x="30" y="30" width="840" height="90" rx="8" fill="#fdecec" stroke="#c85757" stroke-width="1.5"/>
+          <text x="50" y="55" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#8b3d3d">BLOOD</text>
 
-      <h3>Notable suggestive hits</h3>
-      <table>
-        <tr><th>Protein</th><th class="num">log₂FC</th><th>Interpretation</th></tr>
-        <tr><td>BCL2</td><td class="num pos">+2.72</td><td>Apoptotic protein release (transcript ↓ in CD4 CM)</td></tr>
-        <tr><td>CALCA (CGRP)</td><td class="num pos">+1.32</td><td>Neuropeptide — possible nerve damage marker</td></tr>
-        <tr><td>IL-10</td><td class="num pos">+1.04</td><td>Breg / immunoregulatory</td></tr>
-        <tr><td>CXCL8 (IL-8)</td><td class="num pos">+0.70</td><td>DPYD⁺ inflammatory monocyte</td></tr>
-        <tr><td>STAT2</td><td class="num pos">+0.70</td><td>IFN-activated monocyte migration</td></tr>
-        <tr><td>IL1RN</td><td class="num pos">+0.67</td><td>Anti-inflammatory counter-regulation</td></tr>
-      </table>
+          <!-- PNS -->
+          <rect x="30" y="200" width="840" height="90" rx="8" fill="#e8f2ec" stroke="#4a8c5f" stroke-width="1.5"/>
+          <text x="50" y="225" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#2d5a3d">PERIPHERAL NERVE</text>
 
-      <div class="callout">
-        <strong>Activation, not count change.</strong> Cytokine/chemokine proteins collectively elevated (Wilcoxon <em>p</em> = 0.0003, 14/16 up). Cell-identity markers (CD3E, CD14, CD19, MPO, ELANE …) unchanged. Immune cells are changing <em>state</em>, not <em>number</em>.
+          <!-- Cells in blood -->
+          <g transform="translate(180,75)">
+            <circle r="22" fill="#4a90a4"/>
+            <text y="4" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">T cell</text>
+            <text y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">CX3CR1⁺ CCL5⁺</text>
+          </g>
+          <g transform="translate(370,75)">
+            <circle r="22" fill="#8664a0"/>
+            <text y="-2" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">Monocyte</text>
+            <text y="10" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="9">DPYD⁺</text>
+            <text y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">CX3CR1⁺ TREM1⁺</text>
+          </g>
+          <g transform="translate(560,75)">
+            <circle r="22" fill="#0e7a86"/>
+            <text y="4" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">B AFF3⁺</text>
+            <text y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">BANK1⁺</text>
+          </g>
+
+          <!-- Arrows blood -> nerve -->
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L8,5 L0,10 z" fill="#8b3d3d"/>
+            </marker>
+          </defs>
+          <path d="M 180 130 Q 180 165 220 200" stroke="#8b3d3d" stroke-width="2" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
+          <path d="M 370 130 Q 370 165 410 200" stroke="#8b3d3d" stroke-width="2" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,3"/>
+
+          <!-- Cells in nerve -->
+          <g transform="translate(220,255)">
+            <circle r="20" fill="#4a90a4" opacity="0.85"/>
+            <text y="4" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="10" font-weight="700">CD8⁺</text>
+          </g>
+          <g transform="translate(410,255)">
+            <circle r="20" fill="#8664a0" opacity="0.85"/>
+            <text y="-1" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="9" font-weight="700">M1 mac</text>
+            <text y="10" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="9">ADAM28⁺</text>
+          </g>
+
+          <!-- Schwann cell -->
+          <g transform="translate(620,255)">
+            <circle r="26" fill="none" stroke="#c49b0b" stroke-width="4" stroke-dasharray="4,3"/>
+            <circle r="14" fill="#fef3c7"/>
+            <text y="4" text-anchor="middle" fill="#8a6a00" font-family="Inter,sans-serif" font-size="10" font-weight="700">Schwann</text>
+          </g>
+          <text x="620" y="305" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#526a70">Stalled repair</text>
+
+          <!-- Fibroblast -->
+          <g transform="translate(760,255)">
+            <ellipse rx="24" ry="16" fill="#e8dccb" stroke="#a08560" stroke-width="1.5"/>
+            <text y="0" text-anchor="middle" fill="#5a4a30" font-family="Inter,sans-serif" font-size="9" font-weight="700">Fibroblast</text>
+            <text y="12" text-anchor="middle" fill="#5a4a30" font-family="Inter,sans-serif" font-size="8">SLC2A1⁻</text>
+          </g>
+
+          <!-- Axis label -->
+          <text x="450" y="165" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#c85757">CX3CR1 – fractalkine axis</text>
+          <text x="450" y="182" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#8b3d3d" font-style="italic">candidate therapeutic target</text>
+        </svg>
       </div>
-    </div>
-  </section>
 
-  <!-- METHODS -->
-  <section class="tab-panel" id="methods">
-    <div class="card">
-      <h2>Methods — at a glance</h2>
-      <h3>Cohort</h3>
-      <p>28 donors — 21 CIDP (EAN/PNS 2021 criteria, treatment-naive at first visit) and 7 neurological disease controls (NPH, CMT4C, anti-MAG, diabetic neuropathy, IIH). Age 46–86. Age and sex included as covariates.</p>
+      <h3>Three-line summary</h3>
+      <ol>
+        <li><strong>Blood.</strong> Effector T cells and IFN-activated monocytes exit the circulation via CX3CR1; TREM1⁺ inflammatory monocytes and immunosuppressive LDGs accumulate.</li>
+        <li><strong>Nerve.</strong> M1 CX3CR1⁺ ADAM28 macrophages colocalise with damaged myelin; CD8 CCL5⁺ T cells expand; barrier (SLC2A1) breaks down.</li>
+        <li><strong>Schwann cells.</strong> Repair programme is initiated but stalls — myelin proteins fall while APOD/JUN/EGR1 rise.</li>
+      </ol>
 
-      <h3>Single-cell RNA-seq</h3>
-      <p>PBMCs isolated by Ficoll density gradient. Libraries prepared with 10x Genomics Chromium 3' v3 and sequenced on Illumina NovaSeq 6000. Cell Ranger for alignment; Scanpy for QC (200–6,000 genes/cell, &lt;10% mito, ScDblFinder doublet removal). 327,559 cells retained.</p>
+      <div class="callout teal">
+        <strong>The therapeutic hypothesis in one line.</strong> Blocking CX3CR1–fractalkine signalling should reduce immune infiltration of peripheral nerve tissue in CIDP; combining with a remyelination-promoting agent that restarts SOX10/EGR2 could give both anti-inflammatory and regenerative benefit.
+      </div>
 
-      <h3>Integration and annotation</h3>
-      <p>scVI batch integration with donor and batch as covariates → 50-dim latent space used for KNN graph, UMAP, and Milo. Cell type annotation performed on integrated latent space.</p>
-
-      <h3>Differential abundance</h3>
-      <p>Milo (graph-based DA) on scVI latent KNN. Spatial FDR &lt; 0.10. Age + sex as covariates. Neighborhood-level testing → 193 DA neighborhoods across 11 cell types.</p>
-
-      <h3>Differential expression + GSEA</h3>
-      <p>Wilcoxon DEG comparing cells in DA neighborhoods to cells in non-significant neighborhoods of the same cell type. GSEA across MSigDB Hallmark, Reactome, GO:BP, and C7 (Immunologic) collections.</p>
-
-      <h3>Proteomics</h3>
-      <p>Olink Explore HT — 3,255 plasma proteins by proximity extension assay. Empirical Bayes moderation, BH adjustment. Same age/sex covariates. Gene-protein concordance, pathway GSEA comparison, hypothesis-driven validation, cell-type deconvolution.</p>
+      <h3>Methods, code, and data</h3>
+      <p>All analyses in the poster are reproducible from the code in the <a href="https://github.com/izu0421/teichlab_poster" target="_blank">GitHub repository</a>. Preprint and data DOIs will be added on publication.</p>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <p>This is an interactive extension of the poster shown at the Sept 2026 Teichmann Lab meeting. Data and code are available in the <a href="https://github.com/izu0421/teichlab_poster" target="_blank">GitHub repository</a>. For the full manuscript-style report, see <code>report_cidp_nature.md</code> in the repo.</p>
-  <p style="margin-top: 8px;">Teichmann Lab · Wellcome Sanger Institute / University of Cambridge · 2026.</p>
+  <div class="row">
+    <div>
+      <h4>Poster</h4>
+      <p>Presented at the Teichmann Lab meeting, September 2026.<br>
+      <a href="YY_TeichLab_poster_Sept2026.pdf" target="_blank">Download the full PDF</a></p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Yizhou Yu · <a href="mailto:yzy21@cam.ac.uk">yzy21@cam.ac.uk</a><br>
+      <a href="https://yizhouyu.com" target="_blank">yizhouyu.com</a> · <a href="https://twitter.com/izu__u" target="_blank">@izu__u</a></p>
+    </div>
+    <div>
+      <h4>Affiliation</h4>
+      <p>Teichmann Lab, Cambridge Stem Cell Institute, University of Cambridge, UK.</p>
+    </div>
+  </div>
 </footer>
 
 <script>
-  // Tab switching
+  // ---------- Tabs ----------
   const tabs = document.querySelectorAll('nav.tabs button');
   const panels = document.querySelectorAll('section.tab-panel');
   tabs.forEach(btn => btn.addEventListener('click', () => {
@@ -379,75 +564,84 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }));
 
-  // DA bar chart (overview)
-  const daData = [
-    { label: 'Neutrophils', v: 2.76, dir: 'up' },
-    { label: 'B AFF3⁺', v: 2.64, dir: 'up' },
-    { label: 'Monocyte DPYD PLXDC2', v: 0.35, dir: 'up' },
-    { label: 'Monocyte CD14⁺ (IFN)', v: -0.23, dir: 'down' },
-    { label: 'T CD4 Helper 0', v: -0.26, dir: 'down' },
-    { label: 'T CD4 Helper', v: -0.32, dir: 'down' },
-    { label: 'NK', v: -0.12, dir: 'down' },
-    { label: 'T CD8 CTL/EM', v: -0.98, dir: 'down' },
-    { label: 'T CD4 CM', v: -1.03, dir: 'down' },
-    { label: 'Monocyte CD16⁺', v: -1.17, dir: 'down' },
-    { label: 'T NK', v: -1.34, dir: 'down' },
-  ];
-  const daMin = -2, daMax = 3, daSpan = daMax - daMin;
-  const daChart = document.getElementById('da-chart');
-  daData.forEach(d => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    const isPos = d.v > 0;
-    // bar starts at zero point
-    const zeroPct = (0 - daMin) / daSpan * 100;
-    const barPct = Math.abs(d.v) / daSpan * 100;
-    const leftPct = isPos ? zeroPct : zeroPct - barPct;
-    row.innerHTML = `
-      <div class="label">${d.label}</div>
-      <div class="track">
-        <div class="fill ${isPos ? 'pos' : 'neg'}" style="left:${leftPct}%; width:${barPct}%;"></div>
-        <div style="position:absolute; left:${zeroPct}%; top:0; bottom:0; width:1px; background:#c4d0e2;"></div>
-      </div>
-      <div class="val">${d.v > 0 ? '+' : ''}${d.v.toFixed(2)}</div>
-    `;
-    daChart.appendChild(row);
-  });
+  // ---------- Bar chart helper ----------
+  function drawBars(mountId, data, min, max) {
+    const mount = document.getElementById(mountId);
+    if (!mount) return;
+    const span = max - min;
+    const zeroPct = (0 - min) / span * 100;
+    data.forEach(d => {
+      const row = document.createElement('div');
+      row.className = 'bar-row';
+      const isPos = d.v > 0;
+      const barPct = Math.abs(d.v) / span * 100;
+      const leftPct = isPos ? zeroPct : zeroPct - barPct;
+      row.innerHTML = `
+        <div class="label">${d.label}</div>
+        <div class="track">
+          <div class="fill ${isPos ? 'pos' : 'neg'}" style="left:${leftPct}%; width:${barPct}%;"></div>
+          <div style="position:absolute; left:${zeroPct}%; top:0; bottom:0; width:1px; background:#c9c3b3;"></div>
+        </div>
+        <div class="val">${d.v > 0 ? '+' : ''}${d.v.toFixed(2)}</div>
+      `;
+      mount.appendChild(row);
+    });
+  }
 
-  // CD8 chart
-  const cd8Data = [
-    { label: 'GNLY', v: 1.98, cat: 'pos' },
-    { label: 'GZMB', v: 1.23, cat: 'pos' },
-    { label: 'ITGB1 (tissue)', v: 1.18, cat: 'pos' },
-    { label: 'CX3CR1 (tissue)', v: 1.13, cat: 'pos' },
-    { label: 'GZMH', v: 0.96, cat: 'pos' },
-    { label: 'PRF1', v: 0.84, cat: 'pos' },
-    { label: 'CD69 (resident)', v: -0.91, cat: 'neg' },
-    { label: 'IL7R (memory)', v: -1.45, cat: 'neg' },
-    { label: 'MKI67 (prolif)', v: -1.41, cat: 'neg' },
-    { label: 'TCF7 (naive)', v: -1.70, cat: 'neg' },
-    { label: 'CXCR6 (resident)', v: -2.05, cat: 'neg' },
-    { label: 'CCR7 (naive)', v: -3.15, cat: 'neg' },
-  ];
-  const cd8Min = -4, cd8Max = 3, cd8Span = cd8Max - cd8Min;
-  const cd8Chart = document.getElementById('cd8-chart');
-  cd8Data.forEach(d => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    const isPos = d.v > 0;
-    const zeroPct = (0 - cd8Min) / cd8Span * 100;
-    const barPct = Math.abs(d.v) / cd8Span * 100;
-    const leftPct = isPos ? zeroPct : zeroPct - barPct;
-    row.innerHTML = `
-      <div class="label">${d.label}</div>
-      <div class="track">
-        <div class="fill ${isPos ? 'pos' : 'neg'}" style="left:${leftPct}%; width:${barPct}%;"></div>
-        <div style="position:absolute; left:${zeroPct}%; top:0; bottom:0; width:1px; background:#c4d0e2;"></div>
-      </div>
-      <div class="val">${d.v > 0 ? '+' : ''}${d.v.toFixed(2)}</div>
-    `;
-    cd8Chart.appendChild(row);
-  });
+  // Blood DA
+  drawBars('da-chart', [
+    { label: 'Neutrophils', v: 2.76 },
+    { label: 'B AFF3⁺', v: 2.64 },
+    { label: 'Monocyte DPYD PLXDC2', v: 0.35 },
+    { label: 'Monocyte CD14⁺ (IFN)', v: -0.23 },
+    { label: 'T CD4 Helper 0', v: -0.26 },
+    { label: 'T CD4 Helper', v: -0.32 },
+    { label: 'NK', v: -0.12 },
+    { label: 'T CD8 CTL/EM', v: -0.98 },
+    { label: 'T CD4 CM', v: -1.03 },
+    { label: 'Monocyte CD16⁺', v: -1.17 },
+    { label: 'T NK', v: -1.34 },
+  ], -2, 3);
+
+  // CD8 fingerprint
+  drawBars('cd8-chart', [
+    { label: 'GNLY', v: 1.98 },
+    { label: 'GZMB', v: 1.23 },
+    { label: 'ITGB1 (tissue)', v: 1.18 },
+    { label: 'CX3CR1 (tissue)', v: 1.13 },
+    { label: 'GZMH', v: 0.96 },
+    { label: 'PRF1', v: 0.84 },
+    { label: 'CD69 (resident)', v: -0.91 },
+    { label: 'IL7R (memory)', v: -1.45 },
+    { label: 'MKI67 (prolif)', v: -1.41 },
+    { label: 'TCF7 (naive)', v: -1.70 },
+    { label: 'CXCR6 (resident)', v: -2.05 },
+    { label: 'CCR7 (naive)', v: -3.15 },
+  ], -4, 3);
+
+  // Myelin ring enrichment
+  drawBars('myelin-chart', [
+    { label: 'Schwann Mye', v: 1.90 },
+    { label: 'Schwann NonMye 1', v: 1.72 },
+    { label: 'Schwann NonMye 2', v: 1.65 },
+    { label: 'Macrophage M1 CX3CR1 ADAM28', v: 1.45 },
+    { label: 'Macrophage M2 MNDA SPI1', v: 1.25 },
+    { label: 'Schwann quiescent SOX2', v: 1.10 },
+    { label: 'Fibroblast endoneurial', v: 0.95 },
+    { label: 'Macrophage M2 MNDA', v: 0.85 },
+    { label: 'T CD4 CORO1A LCK', v: 0.60 },
+    { label: 'Macrophage M2 CLEC10A CCR2', v: 0.55 },
+  ], 0.5, 2);
+
+  // Nerve T-cell shifts
+  drawBars('nerve-tcell-chart', [
+    { label: 'T CD8 CCL5⁺', v: 0.45 },
+    { label: 'T CD4 CORO1A⁺ LCK⁺', v: 0.15 },
+    { label: 'T CD8 CORO1A⁺', v: 0.06 },
+    { label: 'T CD4 h17 KLRB1⁺', v: -0.05 },
+    { label: 'NK CD8 GNLY⁺', v: -0.12 },
+    { label: 'T CD4 IL7R⁺', v: -0.35 },
+  ], -0.5, 0.6);
 </script>
 
 </body>
