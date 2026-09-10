@@ -163,7 +163,6 @@
   <div class="wrap">
     <div class="brand-row">
       <div class="lab">University of Cambridge · Teichmann Lab <em>Be Bold. Be Brilliant. Be Kind.</em></div>
-      <div>2-min summary</div>
     </div>
     <h1 class="title">Cells of the peripheral nerve in health and disease</h1>
     <div class="authors">
@@ -202,8 +201,7 @@
       <h2>Unmet need in CIDP</h2>
       <p class="lead">Chronic Inflammatory Demyelinating Polyneuropathy is a rare autoimmune disorder in which the immune system attacks the myelin sheath of peripheral nerves — causing muscle weakness and sensory loss — and lacks curative or highly targeted therapies.</p>
 
-      <h3>What we did</h3>
-      <p>Combined single-cell and spatial multiomics on <strong>peripheral nerve biopsies and matched blood</strong> from CIDP patients and controls, then integrated with plasma proteomics, GWAS, and AI-based TCR modelling.</p>
+      <p>We combined single-cell and spatial multiomics on <strong>peripheral nerve biopsies and matched blood</strong> from CIDP patients and controls, and integrated the data with plasma proteomics, GWAS, and AI-based TCR modelling.</p>
 
       <div class="stat-grid">
         <div class="stat"><div class="n">3</div><div class="l">Modalities: scRNA-seq · Xenium spatial · Olink</div></div>
@@ -221,9 +219,7 @@
         <li><strong>Migratory inflammatory cells in blood</strong> — effector T/NK cells and IFN-activated monocytes exit the circulation via CX3CR1–fractalkine signalling.</li>
       </ol>
 
-      <div class="callout teal">
-        <strong>Therapeutic implication.</strong> Blocking CX3CR1-mediated immune infiltration could be a targeted therapy for CIDP — replacing the broad immunosuppression (IVIg) that is the current standard of care.
-      </div>
+      <p>Blocking CX3CR1-mediated immune infiltration could be a targeted therapy for CIDP — an alternative to the broad immunosuppression (IVIg) that is the current standard of care.</p>
     </div>
   </section>
 
@@ -248,9 +244,7 @@
       <h3>Spatial niches (CellCharter)</h3>
       <p>Twelve reproducible spatial niches were defined, ranging from mature endoneurium and myelinating Schwann territory to a distinct <strong>regenerating endoneurium / repair Schwann niche</strong> and an <strong>immune-adipose aggregate</strong> that is enriched in disease.</p>
 
-      <div class="callout">
-        <strong>Repair niche expansion in CIDP.</strong> % region occupied by the repair niche is elevated in CIDP relative to control, while the myelinating niche shrinks — the tissue-level footprint of failed regeneration.
-      </div>
+      <p>% region occupied by the repair niche is elevated in CIDP relative to control, while the myelinating niche shrinks — the tissue-level footprint of failed regeneration.</p>
     </div>
   </section>
 
@@ -263,9 +257,10 @@
       <h3>Myelin geometry is altered in CIDP</h3>
       <table>
         <tr><th>Metric</th><th>Control</th><th>CIDP</th><th>Direction</th></tr>
-        <tr><td>Ring area (µm²)</td><td>higher</td><td>lower ★</td><td class="neg">↓ significant</td></tr>
-        <tr><td>Sheath thickness (µm)</td><td>higher</td><td>lower ★</td><td class="neg">↓ significant</td></tr>
+        <tr><td>Ring area (µm²)</td><td>lower</td><td>higher ★</td><td class="pos">↑ significant</td></tr>
+        <tr><td>Sheath thickness (µm)</td><td>lower</td><td>higher ★</td><td class="pos">↑ significant</td></tr>
       </table>
+      <p style="font-size:13px; color: var(--muted);">Larger ring area and thicker sheaths in CIDP are consistent with dysregulated, aberrant remyelination — Schwann cells attempt repair but produce disorganised, hypertrophic myelin rather than restoring the tight compact structure.</p>
 
       <h3>Cell types spatially enriched around myelin rings</h3>
       <div class="bar-chart" id="myelin-chart"></div>
@@ -294,9 +289,7 @@
         </div>
       </div>
 
-      <div class="callout teal">
-        <strong>The Schwann cell picture.</strong> Repair-programme genes (APOD, JUN, EGR1) are elevated but myelin proteins (MPZ, PRX, PMP22, PLP1) are lost — a "stalled repair" state where cells have committed to regeneration but never finish making myelin. Restarting the SOX10/EGR2 transcriptional programme is a candidate therapeutic strategy.
-      </div>
+      <p>Repair-programme genes (APOD, JUN, EGR1) are elevated but myelin proteins (MPZ, PRX, PMP22, PLP1) are lost — a stalled repair state where Schwann cells commit to regeneration but never finish making compact myelin. Restarting the SOX10/EGR2 transcriptional programme is a candidate therapeutic strategy.</p>
     </div>
   </section>
 
@@ -323,9 +316,7 @@
         <tr><td>M2</td><td>LYVE1</td><td class="neg">↓ decreased</td></tr>
       </table>
 
-      <div class="callout teal">
-        <strong>Convergence on CX3CR1.</strong> The macrophage subset expanded in the nerve carries the same fractalkine receptor CX3CR1 that marks the migrating monocytes and effector T cells in blood — pointing to a single axis (CX3CL1–CX3CR1) coordinating the shift from circulation to tissue.
-      </div>
+      <p>The macrophage subset expanded in the nerve carries the same fractalkine receptor CX3CR1 that marks the migrating monocytes and effector T cells in blood, pointing to a single axis (CX3CL1–CX3CR1) coordinating the shift from circulation to tissue.</p>
 
       <p style="font-size:13px; color: var(--muted); margin-top:16px;">Colocalisation panel (in poster): <strong>CX3CR1⁺ macrophages</strong> co-express CD11c, CD68, PLXDC2 and IRF8 — the phenotypic fingerprint of the inflammatory M1 subset within the nerve.</p>
     </div>
@@ -374,9 +365,7 @@
         </div>
       </div>
 
-      <div class="callout teal">
-        <strong>Proteomic validation of TREM1⁺ axis.</strong> CLEC4E (Mincle) <em>confirmed</em> at log₂FC = +1.54 (<em>p</em><sub>adj</sub> = 0.016). IL-6 <em>confirmed</em> at +1.75 (<em>p</em><sub>adj</sub> = 0.045). CXCL8, IL1RN, STAT2 all suggestive-elevated. TREM1 inhibitors (Phase II in sepsis) are a candidate for repurposing.
-      </div>
+      <p>Proteomic confirmation of the TREM1⁺ axis: CLEC4E (Mincle) at log₂FC = +1.54 (<em>p</em><sub>adj</sub> = 0.016) and IL-6 at +1.75 (<em>p</em><sub>adj</sub> = 0.045); CXCL8, IL1RN and STAT2 all suggestive-elevated. TREM1 inhibitors (Phase II in sepsis) are a candidate for repurposing.</p>
     </div>
   </section>
 
@@ -405,9 +394,7 @@
         <tr><td><code>AASGAAGNKLT</code></td><td><code>ASSLQGNTEAF</code></td></tr>
       </table>
 
-      <div class="callout teal">
-        <strong>Why this matters.</strong> Direct identification of <em>autoantigen-specific</em> TCRs in CIDP has never been demonstrated at scale. If validated, these clones become both diagnostic biomarkers and candidate targets for antigen-specific tolerogenic therapy.
-      </div>
+      <p>Direct identification of autoantigen-specific TCRs in CIDP has not been demonstrated at scale before. If validated, these clones become both diagnostic biomarkers and candidate targets for antigen-specific tolerogenic therapy.</p>
     </div>
   </section>
 
@@ -435,9 +422,7 @@
       <h3>CIDP-relevant hits in sural nerve biopsies</h3>
       <p>Top SNPs with predicted effect on non-myelinating Schwann cells and endothelial venous cells (from the poster's Manhattan plot): <strong>SCMH1</strong>, <strong>ENSG00000249868</strong>, <strong>PTPRD</strong>, <strong>DNA2</strong>, <strong>ANO6</strong>, <strong>ENSG00000266489</strong>.</p>
 
-      <div class="callout">
-        <strong>Interpretation.</strong> Spatial context adds real, statistically robust signal beyond cell-type-level SNP interpretation. In CIDP, several GWAS variants map preferentially to non-myelinating Schwann cells — cells not previously implicated by cell-type-only analyses.
-      </div>
+      <p>Spatial context adds statistically robust signal beyond cell-type-level SNP interpretation. In CIDP, several GWAS variants map preferentially to non-myelinating Schwann cells — cells not previously implicated by cell-type-only analyses.</p>
     </div>
   </section>
 
@@ -515,16 +500,14 @@
         </svg>
       </div>
 
-      <h3>Three-line summary</h3>
+      <h3>Findings across compartments</h3>
       <ol>
         <li><strong>Blood.</strong> Effector T cells and IFN-activated monocytes exit the circulation via CX3CR1; TREM1⁺ inflammatory monocytes and immunosuppressive LDGs accumulate.</li>
         <li><strong>Nerve.</strong> M1 CX3CR1⁺ ADAM28 macrophages colocalise with damaged myelin; CD8 CCL5⁺ T cells expand; barrier (SLC2A1) breaks down.</li>
-        <li><strong>Schwann cells.</strong> Repair programme is initiated but stalls — myelin proteins fall while APOD/JUN/EGR1 rise.</li>
+        <li><strong>Schwann cells.</strong> Repair programme is initiated but stalls — myelin proteins fall while APOD/JUN/EGR1 rise, and rings become hypertrophic rather than compact.</li>
       </ol>
 
-      <div class="callout teal">
-        <strong>The therapeutic hypothesis in one line.</strong> Blocking CX3CR1–fractalkine signalling should reduce immune infiltration of peripheral nerve tissue in CIDP; combining with a remyelination-promoting agent that restarts SOX10/EGR2 could give both anti-inflammatory and regenerative benefit.
-      </div>
+      <p>Blocking CX3CR1–fractalkine signalling could reduce immune infiltration of peripheral nerve tissue in CIDP. Combining this with a remyelination-promoting agent that restarts SOX10/EGR2 may give both anti-inflammatory and regenerative benefit.</p>
 
       <h3>Methods, code, and data</h3>
       <p>All analyses in the poster are reproducible from the code in the <a href="https://github.com/izu0421/teichlab_poster" target="_blank">GitHub repository</a>. Preprint and data DOIs will be added on publication.</p>
