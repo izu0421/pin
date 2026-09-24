@@ -1,6 +1,6 @@
 # CIDP peripheral nerve and blood atlas: manuscript companion
 
-Companion repository for our manuscript *"Schwann cells are reprogrammed, not lost, in chronic inflammatory neuropathy"* (in preparation).
+Companion repository for our manuscript *"Niches of the peripheral nerve in healthy and inflammatory neuropathy"* (in preparation).
 
 Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kretschmer, Nadav Yayon, Shani Perera, Ken To, Rakesh Kapuge, Hansheng Xue, Anna Wilbrey-Clark, Krzysztof Polanski, Alexis Joannides, Mayen Briggs, David K. Menon, David A. Hilton, Nushan Gunawardana, Joanne L. Jones and Sarah A. Teichmann (joint senior authors).
 
