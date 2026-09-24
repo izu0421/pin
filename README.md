@@ -2,7 +2,7 @@
 
 Companion repository for our manuscript *"Schwann cells in chronic inflammatory neuropathy are reprogrammed, not lost, within a nerve niche remodelled by macrophages"* (in preparation).
 
-Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kretschmer, Nadav Yayon, Shani Perera, Ken To, Rakesh Kapuge, Anna Wilbrey-Clark, Krzysztof Polanski, Alexis Joannides, Mayen Briggs, David K. Menon, David Hilton, Nushan Gunawardana, Joanne L. Jones and Sarah A. Teichmann (joint senior authors).
+Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kretschmer, Nadav Yayon, Shani Perera, Ken To, Rakesh Kapuge, Hansheng Xue, Anna Wilbrey-Clark, Krzysztof Polanski, Alexis Joannides, Mayen Briggs, David K. Menon, David A. Hilton, Nushan Gunawardana, Joanne L. Jones and Sarah A. Teichmann (joint senior authors).
 
 ## Contents
 
