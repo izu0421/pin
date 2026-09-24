@@ -1,45 +1,30 @@
-# CIDP peripheral blood atlas — poster + interactive extension
+# CIDP peripheral nerve and blood atlas: manuscript companion
 
-Companion repository for the Teichmann Lab poster *"Peripheral blood single-cell and proteomic profiling reveals coordinated effector lymphocyte egress and myeloid activation in CIDP"* (September 2026).
+Companion repository for our manuscript *"Schwann cells in chronic inflammatory neuropathy are reprogrammed, not lost, within a nerve niche remodelled by macrophages"* (in preparation).
+
+Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kretschmer, Nadav Yayon, Shani Perera, Ken To, Rakesh Kapuge, Anna Wilbrey-Clark, Krzysztof Polanski, Alexis Joannides, Mayen Briggs, David K. Menon, David Hilton, Nushan Gunawardana, Joanne L. Jones and Sarah A. Teichmann (joint senior authors).
 
 ## Contents
 
 | File | What it is |
 |------|-----------|
-| `index.html` | Interactive extension of the printed poster. Tabbed walkthrough of the findings with the underlying numbers behind each figure. Self-contained (no build step, no external JS). |
-| `YY_TeichLab_poster_Sept2026.pdf` | The printed poster (PDF). |
-| `report_cidp_nature.md` | Full manuscript-style report of the analysis. |
-| `poster_qr.png` | QR code linking to the live site (square, high-contrast — best for print). |
-| `poster_qr_rounded.png` | Same QR code with rounded modules (softer aesthetic). |
+| `index.html` | Interactive walkthrough of the findings with the numbers behind each figure: nerve atlas and spatial niches, myelin segmentation and the Schwann cell repair state, inflammation in nerve, and the blood atlas. Self-contained (no build step, no external JS). |
+| `summary.jpg`, `summary.pdf` | Summary schematic. |
+| `xenium.jpg`, `umap_to_spatial.*` | Xenium nerve image and the UMAP-to-spatial animation used on the site. |
+| `YY_TeichLab_poster_Sept2026.pdf` | Earlier poster version of this work (September 2026). Some poster findings (JUN/EGR1 in Schwann cells, SLC2A1 loss in the perineurium) did not replicate in the validation cohort and are not part of the manuscript. |
+| `poster_qr*.png/pdf` | QR codes printed on the poster (they point to the poster site). |
 
-## Enabling GitHub Pages
+T cell receptor analyses (TCRfish) and the GWAS variant mapping (alphagenome2niche) will be reported separately and are not included here.
 
-The interactive site is designed to be served from GitHub Pages at:
+## Viewing the site
 
-**https://izu0421.github.io/teichlab_poster/**
-
-To enable it after pushing:
-
-1. Go to **Settings → Pages** on the GitHub repository.
-2. Under **Source**, select **Deploy from a branch**.
-3. Choose branch **`main`**, folder **`/ (root)`**, and click **Save**.
-4. Wait ~1 minute; the site will be live at the URL above.
-
-The QR codes in this repo already point to that URL.
-
-## Local preview
-
-Just open `index.html` in a browser — no server needed.
-
-Or serve locally:
+Open `index.html` in a browser, or serve locally:
 
 ```bash
 python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## QR code details
+To publish with GitHub Pages: **Settings → Pages → Deploy from a branch → `main`, `/ (root)`**. The site will then be at https://izu0421.github.io/pin/.
 
-- Content: `https://izu0421.github.io/teichlab_poster/`
-- Error correction: High (H) — remains scannable even if ~30% of the code is obscured
-- Recommended print size: **≥ 3 cm × 3 cm** on the poster for reliable scanning from ~30 cm.
+Preprint and data DOIs will be added on publication.

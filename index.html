@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cells of the peripheral nerve in health and disease · Teichmann Lab</title>
-<meta name="description" content="Interactive companion to the Teichmann Lab poster on single-cell and spatial multiomics of CIDP peripheral nerve and blood.">
+<meta name="description" content="Interactive companion to our manuscript on single-cell and spatial multiomics of CIDP peripheral nerve and blood.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -74,7 +74,9 @@
     margin-bottom: 6px;
   }
   .authors .first { font-weight: 600; }
-  .affil { font-size: 13px; opacity: 0.75; margin-bottom: 22px; }
+  .authors sup, .affil sup { font-size: 0.72em; }
+  .affil { font-size: 12.5px; opacity: 0.75; margin-bottom: 22px; max-width: 880px; line-height: 1.6; }
+  .kicker { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; font-weight: 600; }
   .contact { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13.5px; margin-top: 4px; }
   .contact a { color: #cfeef2; border-bottom: 1px dotted rgba(207,238,242,0.5); }
   .contact a:hover { color: white; border-bottom-color: white; }
@@ -272,18 +274,25 @@
 <!-- ================ HEADER ================ -->
 <header>
   <div class="wrap">
-    <h1 class="title">Cells of the peripheral nerve in health and disease</h1>
+    <div class="kicker">Companion to the manuscript</div>
+    <h1 class="title">Schwann cells in chronic inflammatory neuropathy are reprogrammed, not lost, within a nerve niche remodelled by macrophages</h1>
     <div class="authors">
-      <span class="first">Yizhou Yu</span>, Daniel B. Rainbow, Zoya G. Georgieva, Lorenz Kretschmer, Nadav Yayon, Shani Perera, Rakesh Kapuge, Hansheng Xue, Ken To, Anna Wilbrey-Clark, Krzysztof Polanski, Mayen Briggs, David Hilton, Joanne L. Jones and <span class="first">Sarah A. Teichmann</span>.
+      <span class="first">Yizhou Yu</span><sup>1+</sup>, <span class="first">Daniel B. Rainbow</span><sup>2+</sup>, <span class="first">Zoya G. Georgieva</span><sup>2+</sup>, Lorenz Kretschmer<sup>1</sup>, Nadav Yayon<sup>1</sup>, Shani Perera<sup>1</sup>, Ken To<sup>1</sup>, Rakesh Kapuge<sup>1</sup>, Anna Wilbrey-Clark<sup>1</sup>, Krzysztof Polanski<sup>1</sup>, Alexis Joannides<sup>2</sup>, Mayen Briggs<sup>3</sup>, David K. Menon<sup>4</sup>, David Hilton, Nushan Gunawardana<sup>2</sup>, <span class="first">Joanne L. Jones</span><sup>2*</sup> and <span class="first">Sarah A. Teichmann</span><sup>1*</sup>
     </div>
-    <div class="affil">Teichmann Lab @ Cambridge Stem Cell Institute, University of Cambridge, UK</div>
+    <div class="affil">
+      <sup>1</sup>Cambridge Stem Cell Institute and Department of Medicine, University of Cambridge, UK ·
+      <sup>2</sup>Department of Clinical Neurosciences, University of Cambridge, UK ·
+      <sup>3</sup>Cambridge University Hospitals NHS Foundation Trust, UK ·
+      <sup>4</sup>Division of Anaesthesia, University of Cambridge, UK<br>
+      <sup>+</sup>Joint first authors · <sup>*</sup>Joint senior authors
+    </div>
     <div class="contact">
       <a href="https://yizhouyu.com" target="_blank" rel="noopener">yizhouyu.com</a>
       <a href="https://twitter.com/izu__u" target="_blank" rel="noopener">@izu__u</a>
       <a href="mailto:yzy21@cam.ac.uk">yzy21@cam.ac.uk</a>
     </div>
     <div class="cta">
-      <a class="primary" href="https://github.com/izu0421/teichlab_poster" target="_blank" rel="noopener">GitHub repository</a>
+      <a class="primary" href="https://github.com/izu0421/pin" target="_blank" rel="noopener">GitHub repository</a>
     </div>
   </div>
 </header>
@@ -296,9 +305,7 @@
     <button data-tab="myelin"><span class="num">3</span>Myelin &amp; Schwann</button>
     <button data-tab="inflammation"><span class="num">4</span>Inflammation in nerve</button>
     <button data-tab="blood"><span class="num">5</span>Blood atlas</button>
-    <button data-tab="tcrfish"><span class="num">6</span>TCRfish</button>
-    <button data-tab="alphagenome"><span class="num">7</span>alphagenome2niche</button>
-    <button data-tab="summary"><span class="num">8</span>Summary</button>
+    <button data-tab="summary"><span class="num">6</span>Summary</button>
   </nav>
 
   <!-- ============ OVERVIEW ============ -->
@@ -307,35 +314,26 @@
       <figure class="hero-figure">
         <img src="xenium.jpg" alt="Xenium in situ sequencing of a peripheral nerve cross-section, showing multiple fascicles with immune infiltration">
         <figcaption>
-          <strong>Peripheral nerve cross-section, Xenium in situ (477 genes, 27 proteins)</strong>
+          <strong>Peripheral nerve cross section, Xenium in situ (477 genes, 27 proteins)</strong>
           Blue = nuclei, green = interior RNA, yellow = cytoskeletal, red = membrane. Multiple fascicles with immune infiltration in a CIDP donor.
         </figcaption>
       </figure>
       <h2>Unmet need in CIDP</h2>
       <p class="lead">Chronic Inflammatory Demyelinating Polyneuropathy is a rare autoimmune disorder in which the immune system attacks the myelin sheath of peripheral nerves — causing muscle weakness and sensory loss — and lacks curative or highly targeted therapies.</p>
 
-      <p>We combined single-cell and spatial multiomics on <strong>peripheral nerve biopsies and peripheral blood</strong> from CIDP patients and controls, and integrated the data with plasma proteomics, GWAS, and AI-based TCR modelling.</p>
-
-      <div class="stat-grid">
-        <div class="stat"><div class="n">3</div><div class="l">Modalities: scRNA-seq · Xenium spatial · Olink</div></div>
-        <div class="stat"><div class="n">477</div><div class="l">Xenium genes profiled</div></div>
-        <div class="stat"><div class="n">27</div><div class="l">Xenium proteins</div></div>
-        <div class="stat"><div class="n">327,559</div><div class="l">PBMCs across 28 donors</div></div>
-        <div class="stat"><div class="n">3,255</div><div class="l">Plasma proteins (Olink Explore HT)</div></div>
-        <div class="stat"><div class="n">21 / 7</div><div class="l">CIDP patients / controls</div></div>
-      </div>
+      <p>We combined single-cell and spatial multiomics on <strong>peripheral nerve biopsies and peripheral blood</strong> from CIDP patients and controls: Xenium in situ profiling of 477 genes and 27 proteins in nerve, validated in an independent single-nucleus RNA-seq cohort; a blood atlas of 327,559 cells from 28 donors (21 CIDP, 7 controls); and plasma proteomics of 3,255 proteins (Olink Explore HT).</p>
 
       <h3>Key findings</h3>
       <div class="highlight-grid">
         <a href="#" data-tab="myelin" class="highlight finding">
           <div class="h-tag">Finding</div>
-          <div class="h-title">Stalled Schwann cell repair</div>
-          <div class="h-body">Repair genes up (APOD, JUN, EGR1) but myelin proteins lost (MPZ, PRX, PMP22). Rings become hypertrophic — regeneration starts but never completes.</div>
+          <div class="h-title">Schwann cells are reprogrammed, not lost</div>
+          <div class="h-body">Repair genes rise (APOD, NGFR, GAP43; replicated in snRNA-seq) and myelin genes fall, without proliferation. PCNA accumulates while Ki-67 is unchanged — a stalled repair state that separates every patient from every control.</div>
         </a>
         <a href="#" data-tab="inflammation" class="highlight finding">
           <div class="h-tag">Finding</div>
-          <div class="h-title">CX3CR1⁺ macrophages at the lesion</div>
-          <div class="h-body">M1 CX3CR1⁺ ADAM28 macrophages and CD8 CCL5⁺ T cells dominate the diseased microenvironment. M2 macrophages (LYVE1, MS4A7) are lost.</div>
+          <div class="h-title">CX3CR1⁺ macrophages engage Schwann cells</div>
+          <div class="h-body">CX3CR1⁺ ADAM28 macrophages live among Schwann cells and, on contact, switch on a TREM2–APOE–CD68 phagocytic programme while losing MRC1 and CD163. LYVE1⁺ and MS4A7⁺ macrophages are lost in CIDP.</div>
         </a>
         <a href="#" data-tab="blood" class="highlight finding">
           <div class="h-tag">Finding</div>
@@ -344,22 +342,12 @@
         </a>
       </div>
 
-      <h3>New methods</h3>
-      <div class="highlight-grid">
+      <h3>New method</h3>
+      <div class="highlight-grid" style="grid-template-columns: 1fr;">
         <a href="#" data-tab="myelin" class="highlight method">
           <div class="h-tag">New method</div>
           <div class="h-title">AI myelin ring segmentation</div>
-          <div class="h-body">Fine-tuned CellPose-SAM + Gemma-aided CNN classifier segments myelin rings directly from Xenium autofluorescence — enabling per-ring geometry and immune-cell colocalisation at scale.</div>
-        </a>
-        <a href="#" data-tab="tcrfish" class="highlight method">
-          <div class="h-tag">New method</div>
-          <div class="h-title">TCRfish</div>
-          <div class="h-body">Agentic AI orchestration + AlphaFold3 recovers autoreactive TCRs from patient repertoires and predicts their myelin-peptide targets. 184 candidate peptides prioritised for validation.</div>
-        </a>
-        <a href="#" data-tab="alphagenome" class="highlight method">
-          <div class="h-tag">New method</div>
-          <div class="h-title">alphagenome2niche</div>
-          <div class="h-body">GNN framework that maps GWAS-significant SNPs onto spatial niches, not just cell types. Beats cell-type-only prediction on Atera benchmark (Δr = +0.05, p = 4×10⁻¹⁵).</div>
+          <div class="h-body">Fine-tuned CellPose-SAM + Gemma-aided CNN classifier segments myelin rings directly from Xenium autofluorescence, placing every myelinated fibre in the same map as the surrounding cells — enabling per-fibre geometry and immune-cell colocalisation at scale.</div>
         </a>
       </div>
 
@@ -370,7 +358,7 @@
   <!-- ============ NERVE ============ -->
   <section class="tab-panel" id="nerve">
     <div class="card">
-      <h2>Anatomy of the peripheral nerve — profiled at cellular resolution</h2>
+      <h2>Anatomy of the peripheral nerve at cellular resolution</h2>
       <p class="lead">Xenium in situ sequencing of 477 genes and 27 proteins across control and CIDP sural nerve cross-sections, integrated with CellCharter to define spatial niches.</p>
 
       <figure class="inline-figure video">
@@ -394,54 +382,55 @@
       </div>
 
       <h3>Spatial niches (CellCharter)</h3>
-      <p>Twelve reproducible spatial niches were defined, ranging from mature endoneurium and myelinating Schwann territory to a distinct <strong>regenerating endoneurium / repair Schwann niche</strong> and an <strong>immune-adipose aggregate</strong> that is enriched in disease.</p>
+      <p>Twelve reproducible spatial niches were defined, ranging from mature endoneurium and myelinating Schwann territory to a distinct <strong>regenerating endoneurium / repair Schwann niche</strong> and an <strong>immune-adipose aggregate</strong>. A cell’s niche predicts its expression profile better than its cell type alone (per-gene Pearson <em>r</em> 0.25 vs 0.21 across 558 genes; <em>P</em> = 4.2 × 10⁻⁸).</p>
 
-      <p>% region occupied by the repair niche is elevated in CIDP relative to control, while the myelinating niche shrinks — the tissue-level footprint of failed regeneration.</p>
+      <p>The myelinating Schwann niche shrinks in CIDP (10.2% → 5.9% of tissue; <em>q</em> = 0.027). The repair niche is on average ~8-fold larger but varies widely between biopsies (not significant), and when present it is Schwann-cell-dense.</p>
     </div>
   </section>
 
   <!-- ============ MYELIN ============ -->
   <section class="tab-panel" id="myelin">
     <div class="card">
-      <h2>Myelin morphology and Schwann cell repair — AI segmentation from Xenium autofluorescence</h2>
+      <h2>Myelin morphology and Schwann cell repair, measured by AI segmentation of Xenium autofluorescence</h2>
       <p class="lead">A fine-tuned CellPose-SAM + Gemma-aided CNN pipeline segments myelin rings directly from Xenium autofluorescence, letting us measure per-ring geometry and colocalise with immune cells at scale.</p>
 
       <h3>Myelin geometry is altered in CIDP</h3>
       <table>
-        <tr><th>Metric</th><th>Control</th><th>CIDP</th><th>Direction</th></tr>
-        <tr><td>Ring area (µm²)</td><td>lower</td><td>higher ★</td><td class="pos">↑ significant</td></tr>
-        <tr><td>Sheath thickness (µm)</td><td>lower</td><td>higher ★</td><td class="pos">↑ significant</td></tr>
+        <tr><th>Metric (mean per donor)</th><th>Effect in CIDP</th><th><em>P</em></th><th>Direction</th></tr>
+        <tr><td>Ring area</td><td class="num">+31% of control</td><td class="num">0.024</td><td class="pos">↑ larger</td></tr>
+        <tr><td>Sheath thickness</td><td class="num">+16% of control</td><td class="num">0.014</td><td class="pos">↑ thicker</td></tr>
+        <tr><td>g-ratio</td><td class="num">no significant change</td><td class="num">n.s.</td><td>— unchanged</td></tr>
       </table>
-      <p style="font-size:13px; color: var(--muted);">Larger ring area and thicker sheaths in CIDP are consistent with dysregulated, aberrant remyelination — Schwann cells attempt repair but produce disorganised, hypertrophic myelin rather than restoring the tight compact structure.</p>
+      <p style="font-size:13px; color: var(--muted);">Control n = 8, CIDP n = 11 donors. Sheath thickness scales with fibre size, so surviving fibres are larger but proportionate. This fits preferential loss of small fibres, onion-bulb formation around repeatedly damaged fibres, or both — to be resolved against conventional histology.</p>
 
       <h3>Cell types spatially enriched around myelin rings</h3>
       <div class="bar-chart" id="myelin-chart"></div>
-      <div class="axis"><div></div><div class="marks"><span>0.5×</span><span>1×</span><span>2×</span></div><div style="text-align:right;">spatial enrichment</div></div>
-      <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Schwann cells and <strong>M1 CX3CR1⁺ ADAM28 macrophages</strong> are enriched within one cell-diameter of myelin rings — placing the CX3CR1⁺ macrophage physically at the site of demyelination.</p>
+      <div class="axis"><div></div><div class="marks"><span>0×</span><span>0.5×</span><span>1×</span><span>1.5×</span><span>2×</span><span>2.5×</span></div><div style="text-align:right;">spatial enrichment</div></div>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Enrichment within 10 µm of any ring, both conditions pooled. Schwann lineage cells are enriched ~2–2.5-fold, validating the segmentation; <strong>M1 CX3CR1⁺ ADAM28 macrophages</strong> are the most ring-proximal immune cells. No cell type differs significantly between control and CIDP ring neighbourhoods.</p>
 
-      <h3>Increased repair markers, loss of myelination genes</h3>
+      <h3>A stalled repair state in Schwann cells</h3>
       <div class="grid2">
         <div>
-          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">Repair up in disease</p>
+          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">Repair programme up in CIDP</p>
           <table>
-            <tr><td>APOD</td><td class="num pos">↑</td></tr>
-            <tr><td>JUN</td><td class="num pos">↑</td></tr>
-            <tr><td>EGR1</td><td class="num pos">↑</td></tr>
-            <tr><td>SERPINB9</td><td class="num pos">↑</td></tr>
+            <tr><td>APOD</td><td class="num pos">↑ replicated</td></tr>
+            <tr><td>NGFR</td><td class="num pos">↑ replicated</td></tr>
+            <tr><td>GAP43</td><td class="num pos">↑ replicated</td></tr>
+            <tr><td>PCNA (protein)</td><td class="num pos">↑ ~20-fold</td></tr>
           </table>
         </div>
         <div>
-          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">Myelin proteins down in disease</p>
+          <p style="font-size:13px; text-transform:uppercase; letter-spacing:0.6px; color: var(--muted); margin-bottom:8px;">Unchanged or down in CIDP</p>
           <table>
-            <tr><td>MPZ</td><td class="num neg">↓</td></tr>
-            <tr><td>PRX</td><td class="num neg">↓</td></tr>
-            <tr><td>S100B</td><td class="num neg">↓</td></tr>
-            <tr><td>PLP1, PMP22, CNP</td><td class="num neg">↓</td></tr>
+            <tr><td>MPZ, PRX, S100B</td><td class="num neg">↓ (Xenium)</td></tr>
+            <tr><td>MKI67, TOP2A, PCNA mRNA</td><td class="num">— unchanged</td></tr>
+            <tr><td>Ki-67 (protein)</td><td class="num">— unchanged</td></tr>
           </table>
         </div>
       </div>
 
-      <p>Repair-programme genes (APOD, JUN, EGR1) are elevated but myelin proteins (MPZ, PRX, PMP22, PLP1) are lost — a stalled repair state where Schwann cells commit to regeneration but never finish making compact myelin. Restarting the SOX10/EGR2 transcriptional programme is a candidate therapeutic strategy.</p>
+      <p>Across all three Schwann cell subtypes, the repair genes <strong>APOD, NGFR and GAP43</strong> rise in CIDP and replicate in the independent snRNA-seq cohort, while proliferation genes are flat. At the protein level, <strong>PCNA accumulates without Ki-67</strong> (donor-level <em>P</em> = 2.6 × 10⁻⁵, complete separation; Ki-67 <em>P</em> = 0.60): Schwann cells are engaged in the cell cycle or DNA repair but are not dividing. They enter repair but do not complete it. Restarting the SOX10/EGR2 myelination programme is a candidate therapeutic strategy.</p>
+      <p style="font-size:13px; color: var(--muted);">JUN and EGR1, shown on our September 2026 poster, changed in opposite directions in the validation cohort and are no longer used as markers.</p>
     </div>
   </section>
 
@@ -449,12 +438,13 @@
   <section class="tab-panel" id="inflammation">
     <div class="card">
       <h2>Contributors of inflammation in the nerve</h2>
-      <p class="lead">Barrier dysfunction plus infiltrating inflammatory T cells and macrophages together define the diseased microenvironment.</p>
+      <p class="lead">A remodelled blood–nerve barrier, infiltrating effector T cells and Schwann-engaged macrophages together define the diseased microenvironment.</p>
 
-      <h3>Blood-nerve barrier integrity is impaired</h3>
-      <p><strong>SLC2A1</strong> (GLUT1, a perineurium metabolic and barrier marker) is negatively correlated with disease enrichment in the nerve niches (<em>r</em> = −0.28, <em>p</em> &lt; 0.0001). Loss of SLC2A1 tracks the same regions where inflammatory infiltrate accumulates — consistent with barrier breakdown enabling immune entry.</p>
+      <h3>The perineurial barrier is remodelled</h3>
+      <p>In perineurial fibroblasts, the tight-junction gene <strong>CLDN1</strong>, the Hedgehog receptor <strong>PTCH1</strong>, <strong>DCN</strong> and <strong>APOD</strong> all increase in CIDP, and all four replicate in the snRNA-seq cohort. Because Schwann-cell-derived Desert hedgehog maintains the perineurium, this suggests an active, Hedgehog-linked response of the barrier to injury.</p>
+      <p style="font-size:13px; color: var(--muted);">Loss of SLC2A1 (GLUT1), shown on our September 2026 poster, reversed direction in the validation cohort and is not interpreted.</p>
 
-      <h3>T cell shift — CD8 CCL5⁺ expansion</h3>
+      <h3>CD8 CCL5⁺ T cells expand in the nerve</h3>
       <div class="bar-chart" id="nerve-tcell-chart"></div>
       <div class="axis"><div></div><div class="marks"><span>−0.5</span><span>0</span><span>+0.5</span></div><div style="text-align:right;">log₂ disease enrichment</div></div>
       <p style="font-size:13px; color: var(--muted);">T CD8 CCL5⁺ cells dominate the disease-associated T cell increase — likely originating from peripheral blood, matching the CD8 effector egress signature seen in the blood atlas.</p>
@@ -471,13 +461,24 @@
       <p>The macrophage subset expanded in the nerve carries the same fractalkine receptor CX3CR1 that marks the migrating monocytes and effector T cells in blood, pointing to a single axis (CX3CL1–CX3CR1) coordinating the shift from circulation to tissue.</p>
 
       <p style="font-size:13px; color: var(--muted); margin-top:16px;">The disease-associated <strong>CX3CR1⁺ macrophages</strong> co-express CD11c, CD68, PLXDC2 and IRF8 — the phenotypic fingerprint of the inflammatory M1 subset within the nerve.</p>
+
+      <h3>Macrophages switch programme on contact with Schwann cells</h3>
+      <p>Each macrophage state has a defined address: <strong>CX3CR1⁺ ADAM28</strong> macrophages are the only state enriched among all three Schwann cell subtypes, whereas LYVE1⁺ and MS4A7⁺ macrophages live in the epineurium and avoid Schwann cells. Comparing macrophages near to and far from Schwann cells within each donor:</p>
+      <table>
+        <tr><th>Readout</th><th>Near Schwann cells (CX3CR1⁺ ADAM28 and TREM2⁺ APOE⁺ precursors)</th></tr>
+        <tr><td>TREM2, APOE (RNA)</td><td class="pos">↑ up</td></tr>
+        <tr><td>CD68, CD11c (protein)</td><td class="pos">↑ up</td></tr>
+        <tr><td>MRC1 (RNA), CD163 (protein)</td><td class="neg">↓ down</td></tr>
+        <tr><td>Myelin transcripts (MPZ, MBP, PLP1)</td><td class="pos">↑ up — engulfed myelin or segmentation spillover, being resolved</td></tr>
+      </table>
+      <p>Schwann contact therefore converts these macrophages from a homeostatic to a TREM2–APOE phagocytic state. Where TREM2⁺ APOE⁺ precursors are denser, neighbouring Schwann cells express more of the repair gene APOD. Whether these macrophages cause the Schwann cell stall or respond to it is the central open question; we are testing six candidate mechanisms against pre-specified spatial predictions before functional experiments.</p>
     </div>
   </section>
 
   <!-- ============ BLOOD ============ -->
   <section class="tab-panel" id="blood">
     <div class="card">
-      <h2>Blood atlas — 327,559 PBMCs, 28 donors</h2>
+      <h2>Blood atlas of 327,559 PBMCs from 28 donors</h2>
       <p class="lead">Milo differential abundance testing identifies 11 cell types (8 depleted, 3 enriched) with a coherent story: effector lymphocytes and IFN monocytes leave the blood for tissue; TREM1⁺ inflammatory monocytes and LDGs accumulate.</p>
 
       <h3>Differentially abundant populations</h3>
@@ -488,7 +489,7 @@
         <div style="text-align:right;">median log₂FC</div>
       </div>
 
-      <h3>CD8 CTL/EM — terminal effectors leaving the blood</h3>
+      <h3>Terminal effector CD8 T cells leave the blood</h3>
       <p>150 of 2,200 T CD8 CTL/EM neighborhoods depleted (median log₂FC = −0.98) — the strongest single-cell signal in the study. Depleted cells are transcriptionally <strong>terminally differentiated</strong>, <strong>migratory</strong>, and <strong>not exhausted</strong>.</p>
       <div class="bar-chart" id="cd8-chart"></div>
       <div class="axis"><div></div><div class="marks"><span>−4</span><span>−2</span><span>0</span><span>+2</span></div><div style="text-align:right;">log₂FC</div></div>
@@ -521,63 +522,6 @@
     </div>
   </section>
 
-  <!-- ============ TCRFISH ============ -->
-  <section class="tab-panel" id="tcrfish">
-    <div class="card">
-      <h2>TCRfish — agentic AI + AlphaFold3 to find autoreactive T cells</h2>
-      <p class="lead">Given a CIDP TCR repertoire, TCRfish orchestrates matching against reference disease-associated TCRs, infers common HLAs, predicts antigen presentation, and folds the peptide–MHC–TCR complex with AlphaFold3.</p>
-
-      <h3>Pipeline</h3>
-      <ol>
-        <li>Identify TCRs from CIDP samples (bulk + single-cell).</li>
-        <li>Match against reference disease-associated TCRs (annotate by CDR3 and disease-enrichment).</li>
-        <li>Infer common patient HLAs.</li>
-        <li>Predict which myelin-derived peptides are presented.</li>
-        <li>Fold the peptide-MHC-TCR complex with AlphaFold3 to score plausible binding.</li>
-      </ol>
-
-      <h3>Output</h3>
-      <p><strong>184 candidate peptides</strong> prioritised for experimental validation, spanning myelin target proteins <strong>MPZ, CNTN1, MBP, BDNF, MAG, PLP1, PMP2</strong>. Representative CDR3α/β pairs recovered from CIDP donors:</p>
-      <table>
-        <tr><th>CDR3α</th><th>CDR3β</th></tr>
-        <tr><td><code>AVLSGYSTLT</code></td><td><code>AWKRGTGDEKLF</code></td></tr>
-        <tr><td><code>ALSEIGTSYDKVI</code></td><td><code>ASSQSGTSGRETQY</code></td></tr>
-        <tr><td><code>AMSAVSGNTPLV</code></td><td><code>ASSPGNTEAF</code></td></tr>
-        <tr><td><code>AASGAAGNKLT</code></td><td><code>ASSLQGNTEAF</code></td></tr>
-      </table>
-
-      <p>Direct identification of autoantigen-specific TCRs in CIDP has not been demonstrated at scale before. If validated, these clones become both diagnostic biomarkers and candidate targets for antigen-specific tolerogenic therapy.</p>
-    </div>
-  </section>
-
-  <!-- ============ ALPHAGENOME ============ -->
-  <section class="tab-panel" id="alphagenome">
-    <div class="card">
-      <h2>alphagenome2niche — spatial context improves GWAS interpretation</h2>
-      <p class="lead">A GNN-based framework that maps GWAS-significant SNPs onto spatial niches rather than isolated cell types — and outperforms cell-type-only prediction on held-out data.</p>
-
-      <h3>Approach</h3>
-      <ol>
-        <li>Learn gene-expression-based cell types and GNN-constructed spatial niches from Xenium data.</li>
-        <li>Linear-probe on AlphaGenome to predict SNP-level effect on tissue.</li>
-        <li>Feed CIDP GWAS-significant variants through the model to score effect on cell types <em>and</em> niches.</li>
-      </ol>
-
-      <h3>Benchmark (Atera held-out data)</h3>
-      <div class="stat-grid">
-        <div class="stat"><div class="n">~0.22</div><div class="l">Cell-type only (Pearson r)</div></div>
-        <div class="stat"><div class="n">~0.27</div><div class="l">+ spatial niche (Pearson r)</div></div>
-        <div class="stat"><div class="n">Δ = +0.05</div><div class="l">Improvement</div></div>
-        <div class="stat"><div class="n">p = 4×10⁻¹⁵</div><div class="l">Significance</div></div>
-      </div>
-
-      <h3>CIDP-relevant hits in sural nerve biopsies</h3>
-      <p>Top SNPs with predicted effect on non-myelinating Schwann cells and endothelial venous cells: <strong>SCMH1</strong>, <strong>ENSG00000249868</strong>, <strong>PTPRD</strong>, <strong>DNA2</strong>, <strong>ANO6</strong>, <strong>ENSG00000266489</strong>.</p>
-
-      <p>Spatial context adds statistically robust signal beyond cell-type-level SNP interpretation. In CIDP, several GWAS variants map preferentially to non-myelinating Schwann cells — cells not previously implicated by cell-type-only analyses.</p>
-    </div>
-  </section>
-
   <!-- ============ SUMMARY ============ -->
   <section class="tab-panel" id="summary">
     <div class="card">
@@ -589,15 +533,15 @@
 
       <h3>Findings across compartments</h3>
       <ol>
-        <li><strong>Blood.</strong> Effector T cells and IFN-activated monocytes exit the circulation via CX3CR1; TREM1⁺ inflammatory monocytes and immunosuppressive LDGs accumulate.</li>
-        <li><strong>Nerve.</strong> M1 CX3CR1⁺ ADAM28 macrophages colocalise with damaged myelin; CD8 CCL5⁺ T cells expand; barrier (SLC2A1) breaks down.</li>
-        <li><strong>Schwann cells.</strong> Repair programme is initiated but stalls — myelin proteins fall while APOD/JUN/EGR1 rise, and rings become hypertrophic rather than compact.</li>
+        <li><strong>Blood.</strong> Effector CD8 T cells and CX3CR1⁺ IFN-activated monocytes are depleted from the circulation; TREM1⁺ inflammatory monocytes accumulate, with IL-6 and CLEC4E raised in plasma.</li>
+        <li><strong>Nerve.</strong> CX3CR1⁺ ADAM28 macrophages sit among Schwann cells and switch on a TREM2–APOE–CD68 phagocytic programme on contact; CD8 CCL5⁺ T cells expand; the perineurial barrier is remodelled (CLDN1, PTCH1).</li>
+        <li><strong>Schwann cells.</strong> Reprogrammed, not lost — the repair programme (APOD, NGFR, GAP43) is switched on without proliferation, PCNA accumulates without Ki-67, and surviving fibres are enlarged with a preserved g-ratio.</li>
       </ol>
 
       <p>Blocking CX3CR1–fractalkine signalling could reduce immune infiltration of peripheral nerve tissue in CIDP. Combining this with a remyelination-promoting agent that restarts SOX10/EGR2 may give both anti-inflammatory and regenerative benefit.</p>
 
       <h3>Methods, code, and data</h3>
-      <p>All analyses in the poster are reproducible from the code in the <a href="https://github.com/izu0421/teichlab_poster" target="_blank">GitHub repository</a>. Preprint and data DOIs will be added on publication.</p>
+      <p>This site accompanies our manuscript (in preparation). Code and figures are in the <a href="https://github.com/izu0421/pin" target="_blank">GitHub repository</a>; preprint and data DOIs will be added on publication.</p>
     </div>
   </section>
 
@@ -686,26 +630,26 @@
 
   // Myelin ring enrichment
   drawBars('myelin-chart', [
-    { label: 'Schwann Mye', v: 1.90 },
-    { label: 'Schwann NonMye 1', v: 1.72 },
-    { label: 'Schwann NonMye 2', v: 1.65 },
-    { label: 'Macrophage M1 CX3CR1 ADAM28', v: 1.45 },
-    { label: 'Macrophage M2 MNDA SPI1', v: 1.25 },
-    { label: 'Schwann quiescent SOX2', v: 1.10 },
+    { label: 'Schwann Mye', v: 2.25 },
+    { label: 'Schwann NonMye 1', v: 2.18 },
+    { label: 'Schwann NonMye 2', v: 2.15 },
+    { label: 'Macrophage M1 CX3CR1 ADAM28', v: 1.18 },
+    { label: 'Macrophage M2 MNDA SPI1', v: 1.17 },
+    { label: 'Schwann quiescent SOX2', v: 1.12 },
     { label: 'Fibroblast endoneurial', v: 0.95 },
-    { label: 'Macrophage M2 MNDA', v: 0.85 },
-    { label: 'T CD4 CORO1A LCK', v: 0.60 },
-    { label: 'Macrophage M2 CLEC10A CCR2', v: 0.55 },
-  ], 0.5, 2);
+    { label: 'Macrophage M2 MNDA', v: 0.83 },
+    { label: 'T CD4 CORO1A LCK', v: 0.68 },
+    { label: 'Macrophage M2 CLEC10A CCR2', v: 0.65 },
+  ], 0, 2.5);
 
   // Nerve T-cell shifts
   drawBars('nerve-tcell-chart', [
-    { label: 'T CD8 CCL5⁺', v: 0.45 },
-    { label: 'T CD4 CORO1A⁺ LCK⁺', v: 0.15 },
-    { label: 'T CD8 CORO1A⁺', v: 0.06 },
-    { label: 'T CD4 h17 KLRB1⁺', v: -0.05 },
-    { label: 'NK CD8 GNLY⁺', v: -0.12 },
-    { label: 'T CD4 IL7R⁺', v: -0.35 },
+    { label: 'T CD8 CCL5⁺', v: 0.53 },
+    { label: 'T CD4 CORO1A⁺ LCK⁺', v: 0.17 },
+    { label: 'T CD8 CORO1A⁺', v: 0.03 },
+    { label: 'T CD4 h17 KLRB1⁺', v: -0.06 },
+    { label: 'NK CD8 GNLY⁺', v: -0.13 },
+    { label: 'T CD4 IL7R⁺', v: -0.45 },
   ], -0.5, 0.6);
 </script>
 
