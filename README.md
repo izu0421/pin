@@ -1,6 +1,6 @@
 # CIDP peripheral nerve and blood atlas: manuscript companion
 
-Companion repository for our manuscript *"Niches of the peripheral nerve in health and inflammatory neuropathy"* (in preparation).
+Companion site for our manuscript *"Niches of the peripheral nerve in health and inflammatory neuropathy"* (in preparation).
 
 Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kretschmer, Nadav Yayon, Shani Perera, Ken To, Rakesh Kapuge, Hansheng Xue, Anna Wilbrey-Clark, Krzysztof Polanski, Alexis Joannides, Aaditya Prabhu, Rhys Roberts, Mayen Briggs, David K. Menon, David A. Hilton, Nushan Gunawardana, Joanne L. Jones and Sarah A. Teichmann (joint senior authors).
 
@@ -28,7 +28,5 @@ Open `index.html` in a browser, or serve locally:
 python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
-
-To publish with GitHub Pages: **Settings → Pages → Deploy from a branch → `main`, `/ (root)`**. The site will then be at https://izu0421.github.io/pin/.
 
 Preprint and data DOIs will be added on publication.
