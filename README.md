@@ -2,7 +2,7 @@
 
 Companion repository for our manuscript *"Niches of the peripheral nerve in health and inflammatory neuropathy"* (in preparation).
 
-Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kretschmer, Nadav Yayon, Shani Perera, Ken To, Rakesh Kapuge, Hansheng Xue, Anna Wilbrey-Clark, Krzysztof Polanski, Alexis Joannides, Mayen Briggs, David K. Menon, David A. Hilton, Nushan Gunawardana, Joanne L. Jones and Sarah A. Teichmann (joint senior authors).
+Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kretschmer, Nadav Yayon, Shani Perera, Ken To, Rakesh Kapuge, Hansheng Xue, Anna Wilbrey-Clark, Krzysztof Polanski, Alexis Joannides, Aaditya Prabhu, Rhys Roberts, Mayen Briggs, David K. Menon, David A. Hilton, Nushan Gunawardana, Joanne L. Jones and Sarah A. Teichmann (joint senior authors).
 
 ## Contents
 
@@ -15,6 +15,12 @@ Yizhou Yu, Daniel B. Rainbow, Zoya G. Georgieva (joint first authors), Lorenz Kr
 T cell receptor analyses (TCRfish) and the GWAS variant mapping (alphagenome2niche) will be reported separately and are not included here.
 
 ## Viewing the site
+
+`index.html` is password protected: it is an AES-encrypted build of `src/index.html` (which is gitignored). Edit `src/index.html`, then rebuild:
+
+```bash
+SITE_PASSWORD='...' node encrypt.mjs
+```
 
 Open `index.html` in a browser, or serve locally:
 
