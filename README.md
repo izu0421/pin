@@ -28,6 +28,7 @@ findings concern cell state and movement, not tissue destruction.
 | `index.html` | The site: a password-protected, AES-encrypted build of `src/index.html`. Seven tabs: Overview, Nerve tissue, Myelin & Schwann, Vessels & macrophages, Blood atlas, Genetics, Summary. Self-contained (no build step, no external JS). |
 | `encrypt.mjs` | Builds `index.html` from `src/index.html`. |
 | `xenium.jpg`, `umap_to_spatial.*` | Xenium nerve image and the UMAP-to-spatial animation used on the site. |
+| `cidp_explainer.mp4`, `cidp_explainer_poster.jpg` | Three-minute narrated explainer (subtitles burned in) shown on the Overview tab. Note: media files are not encrypted. |
 | `summary.jpg`, `summary.pdf` | An earlier summary schematic, kept for reference; the Summary tab now draws its own diagram. |
 | logos, favicons, `CNAME` | Site assets and the custom domain. |
 
