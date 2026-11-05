@@ -26,7 +26,8 @@ findings concern cell state and movement, not tissue destruction.
 | File | What it is |
 |------|-----------|
 | `index.html` | The site: a password-protected, AES-encrypted build of `src/index.html`. Seven tabs: Overview, Nerve tissue, Myelin & Schwann, Vessels & macrophages, Blood atlas, Genetics, Summary. Self-contained (no build step, no external JS). |
-| `encrypt.mjs` | Builds `index.html` from `src/index.html`. |
+| `encrypt.mjs` | Builds `index.html` from `src/index.html`; with arguments, encrypts any page (`node encrypt.mjs in.html out.html`). |
+| `manuscript_draft/index.html` | The current manuscript draft, encrypted with the site password; figures are embedded inside the encrypted page. Built from `cidp/manuscript/MANUSCRIPT.md` by `cidp/manuscript/src/build_html.sh`. `manusript_draft/` redirects to it. |
 | `xenium.jpg`, `umap_to_spatial.*` | Xenium nerve image and the UMAP-to-spatial animation used on the site. |
 | `cidp_explainer.mp4`, `cidp_explainer_poster.jpg` | Three-minute narrated explainer (subtitles burned in) shown on the Overview tab. Note: media files are not encrypted. |
 | `summary.jpg`, `summary.pdf` | An earlier summary schematic, kept for reference; the Summary tab now draws its own diagram. |
@@ -41,6 +42,13 @@ T cell receptor analyses are reported separately and are not included here.
 
 ```bash
 SITE_PASSWORD='...' node encrypt.mjs
+```
+
+Manuscript draft:
+
+```bash
+/data/yzy21/yy/cidp/manuscript/src/build_html.sh        # -> src/manuscript_draft.html
+SITE_PASSWORD='...' node encrypt.mjs src/manuscript_draft.html manuscript_draft/index.html
 ```
 
 Serve locally to check it:
